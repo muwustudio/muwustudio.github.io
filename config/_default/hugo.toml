@@ -1,0 +1,7 @@
+baseURL        = "https://muwustudio.github.io/"
+languageCode   = "zh-cn"
+theme          = "stack"
+paginate       = 10
+title          = "牧屋 MUWU"
+copyright      = "牧屋 MUWU"
+hasCJKLanguage = true  # 中文支持
