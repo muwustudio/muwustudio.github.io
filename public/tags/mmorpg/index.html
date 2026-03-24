@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="独立游戏开发者 | Unity & C#">
+<title>MMORPG</title>
+
+
+<link rel="canonical" href="http://localhost:1313/tags/mmorpg/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.389e156f5e9bb13df5a924cfa99dfb9c39f3e01e68d9e146cd65bdae963be145.css"><meta property='og:title' content="MMORPG">
+<meta property='og:description' content="独立游戏开发者 | Unity & C#">
+<meta property='og:url' content='http://localhost:1313/tags/mmorpg/'>
+<meta property='og:site_name' content='牧屋 MUWU'>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-03-24T14:00:00&#43;08:00 '/>
+<meta name="twitter:title" content="MMORPG">
+<meta name="twitter:description" content="独立游戏开发者 | Unity & C#"><link rel="alternate" type="application/rss&#43;xml" href="http://localhost:1313/tags/mmorpg/index.xml"><style>
+:root { --accent-color: #7CB342 !important; --accent-color-darker: #5a8c2f !important; }
+[data-scheme="dark"] { --accent-color: #F4A623 !important; --accent-color-darker: #d48a0f !important; }
+
+body {
+    background: linear-gradient(rgba(248,250,245,0.75), rgba(248,250,245,0.85)), 
+                url('https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=1920&q=80') center/cover fixed !important;
+}
+
+[data-scheme="dark"] body { background: #0a0a15 !important; }
+
+.stars-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; display: none;
+}
+[data-scheme="dark"] .stars-container { display: block; }
+
+.star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite; }
+@keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+.sidebar, .article-list--tile article, .widget {
+    background: rgba(255,255,255,0.88) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(124,179,66,0.25) !important;
+}
+
+[data-scheme="dark"] .sidebar,
+[data-scheme="dark"] .article-list--tile article,
+[data-scheme="dark"] .widget {
+    background: rgba(20,20,35,0.88) !important;
+    border: 1px solid rgba(244,166,35,0.25) !important;
+}
+
+.article-list--tile article:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 20px 60px rgba(124,179,66,0.3) !important;
+}
+
+[data-scheme="dark"] .article-list--tile article:hover {
+    box-shadow: 0 20px 60px rgba(244,166,35,0.35) !important;
+}
+
+.sidebar .site-avatar:hover { transform: scale(1.2) rotate(12deg) !important; }
+.menu .menu-item:hover { transform: translateX(8px) !important; }
+.menu .menu-item:hover a { color: var(--accent-color) !important; }
+
+.tagCloud-tags a:hover {
+    background: var(--accent-color) !important;
+    color: white !important;
+    transform: scale(1.12) !important;
+}
+
+a { color: var(--accent-color) !important; }
+.main-container { background: transparent !important; }
+.main-container, .sidebar { position: relative; z-index: 1; }
+</style>
+
+<script>
+(function() {
+    function createStars() {
+        let c = document.querySelector('.stars-container');
+        if(c) c.remove();
+        c = document.createElement('div');
+        c.className = 'stars-container';
+        document.body.insertBefore(c, document.body.firstChild);
+        
+        for(let i=0; i<150; i++) {
+            const s = document.createElement('div');
+            s.className = 'star';
+            const size = Math.random();
+            if(size < 0.6) s.style.width = s.style.height = '1px';
+            else if(size < 0.9) s.style.width = s.style.height = '2px';
+            else { s.style.width = s.style.height = '3px'; s.style.boxShadow = '0 0 4px white'; }
+            s.style.left = Math.random()*100+'%';
+            s.style.top = Math.random()*100+'%';
+            s.style.animationDelay = Math.random()*3+'s';
+            s.style.animationDuration = (2+Math.random()*2)+'s';
+            c.appendChild(s);
+        }
+    }
+    
+    if(document.readyState==='loading') {
+        document.addEventListener('DOMContentLoaded', createStars);
+    } else { 
+        createStars(); 
+    }
+})();
+</script>
+
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="150"
+                        height="150"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🏠</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">牧屋 MUWU</a></h1>
+            <h2 class="site-description">独立游戏开发者 | Unity &amp; C#</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/muwustudio'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>分类</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+                
+                <span>标签</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+            
+        
+            
+                
+            
+        
+            
+                
+<section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">
+        
+            <a href="/categories/">
+                Categories
+            </a>
+        
+    </h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/log/">
+                Log
+            </a>
+        
+            <a href="/categories/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/">
+                开发日志
+            </a>
+        
+            <a href="/categories/%E9%9A%8F%E7%AC%94/">
+                随笔
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+            
+                
+<section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">
+        
+            <a href="/tags/">
+                Tags
+            </a>
+        
+    </h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/c%23/">
+                C#
+            </a>
+        
+            <a href="/tags/first-principles/">
+                First Principles
+            </a>
+        
+            <a href="/tags/mmorpg/">
+                MMORPG
+            </a>
+        
+            <a href="/tags/reading/">
+                Reading
+            </a>
+        
+            <a href="/tags/unity/">
+                Unity
+            </a>
+        
+            <a href="/tags/%E7%89%A7%E5%B1%8B/">
+                牧屋
+            </a>
+        
+            <a href="/tags/%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F/">
+                独立游戏
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <header>
+        <h3 class="section-title">
+            
+                Tags
+            
+        </h3>
+
+        <div class="section-card">
+            <div class="section-details">
+                <h3 class="section-count">1 page</h3>
+                <h1 class="section-term">MMORPG</h1>
+                
+            </div>
+        </div>
+    </header>
+    
+    
+        <section class="article-list--compact">
+            
+                <article>
+    <a href="/posts/mmorpg-devlog-01/">
+        <div class="article-details">
+            <h2 class="article-title">MMORPG开发日志01：背包系统的设计与实现</h2>
+                <footer class="article-meta"><time datetime="2026-03-24T14:00:00&#43;08:00">Tuesday, March 24, 2026</time>
+                </footer></div>
+        <div class="article-image">
+            <img alt="MMORPG开发日志01：背包系统的设计与实现" height="60" loading="lazy" src="/photo-1614853316476-de00d14cb1fc_15164071187798526002_hu_5c0d3dbb681e2592.jpg" srcset="/photo-1614853316476-de00d14cb1fc_15164071187798526002_hu_5c0d3dbb681e2592.jpg 1x, /photo-1614853316476-de00d14cb1fc_15164071187798526002_hu_411b62201f1c0b22.jpg 2x" width="60">
+
+        </div>
+        
+    </a>
+</article>
+            
+        </section>
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 牧屋 MUWU
+    </section>
+    
+    <section class="powerby">
+        
+            牧屋 MUWU <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="4.0.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.d3757aef18fb0954ee30c875b719bd53d4a9f24b7cb7f06a206f090ffbaffeeb.js" defer></script>
+
+
+    </body>
+</html>

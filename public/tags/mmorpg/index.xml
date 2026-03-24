@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>MMORPG on 牧屋 MUWU</title>
+        <link>http://localhost:1313/tags/mmorpg/</link>
+        <description>Recent content in MMORPG on 牧屋 MUWU</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Tue, 24 Mar 2026 14:00:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/mmorpg/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>MMORPG开发日志01：背包系统的设计与实现</title>
+            <link>http://localhost:1313/posts/mmorpg-devlog-01/</link>
+            <pubDate>Tue, 24 Mar 2026 14:00:00 +0800</pubDate>
+            <guid>http://localhost:1313/posts/mmorpg-devlog-01/</guid>
+            <description>&lt;img src=&#34;http://localhost:1313/&#34; alt=&#34;Featured image of post MMORPG开发日志01：背包系统的设计与实现&#34; /&gt;&lt;h2 id=&#34;今天做了什么&#34;&gt;今天做了什么？&#xA;&lt;/h2&gt;&lt;p&gt;完成了MMORPG项目的背包系统，支持物品添加、删除、堆叠和排序。&lt;/p&gt;&#xA;&lt;h2 id=&#34;技术设计&#34;&gt;技术设计&#xA;&lt;/h2&gt;&lt;p&gt;使用List存储物品列表，ScriptableObject定义物品模板。&lt;/p&gt;&#xA;&lt;h2 id=&#34;遇到的问题&#34;&gt;遇到的问题&#xA;&lt;/h2&gt;&lt;h3 id=&#34;问题1物品堆叠溢出&#34;&gt;问题1：物品堆叠溢出&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;现象：&lt;/strong&gt; 背包满时继续拾取可堆叠物品，数量会超过上限。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt; 在AddItem方法中添加堆叠上限检查。&lt;/p&gt;&#xA;&lt;h3 id=&#34;问题2ui刷新不及时&#34;&gt;问题2：UI刷新不及时&#xA;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;现象：&lt;/strong&gt; 拖拽物品后UI显示不同步。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt; 使用观察者模式，数据变更时触发UI刷新事件。&lt;/p&gt;&#xA;&lt;h2 id=&#34;ai的帮助&#34;&gt;AI的帮助&#xA;&lt;/h2&gt;&lt;p&gt;用Cursor IDE加速了代码编写，用Ollama帮我Review了核心逻辑。&lt;/p&gt;&#xA;&lt;h2 id=&#34;下一步计划&#34;&gt;下一步计划&#xA;&lt;/h2&gt;&lt;ul&gt;&#xA;&lt;li&gt;实现装备系统&lt;/li&gt;&#xA;&lt;li&gt;添加物品排序功能&lt;/li&gt;&#xA;&lt;li&gt;优化UI拖拽手感&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+        </item></channel>
+</rss>

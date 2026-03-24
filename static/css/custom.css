@@ -1,0 +1,159 @@
+﻿/* Muwu Theme Colors */
+:root {
+    --accent-color: #7CB342 !important;
+    --accent-color-darker: #5a8c2f !important;
+    --accent-color-text: #fff !important;
+}
+
+[data-scheme="dark"] {
+    --accent-color: #F4A623 !important;
+    --accent-color-darker: #d48a0f !important;
+}
+
+/* Light mode - Meadow background */
+body {
+    background: linear-gradient(rgba(248, 250, 245, 0.75), rgba(248, 250, 245, 0.85)), url('https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=1920&q=80') center/cover fixed !important;
+    background-attachment: fixed !important;
+}
+
+/* Dark mode - Starry sky */
+[data-scheme="dark"] body {
+    background: #0a0a15 !important;
+}
+
+/* Stars container */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    display: none;
+}
+
+[data-scheme="dark"] .stars-container {
+    display: block;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle linear infinite;
+}
+
+.star.small { width: 1px; height: 1px; opacity: 0.3; }
+.star.medium { width: 2px; height: 2px; opacity: 0.5; }
+.star.large { width: 3px; height: 3px; opacity: 0.8; box-shadow: 0 0 4px rgba(255,255,255,0.5); }
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Glass morphism cards */
+.sidebar,
+.article-list--tile article,
+.widget {
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(124, 179, 66, 0.25) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+[data-scheme="dark"] .sidebar,
+[data-scheme="dark"] .article-list--tile article,
+[data-scheme="dark"] .widget {
+    background: rgba(20, 20, 35, 0.88) !important;
+    backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(244, 166, 35, 0.25) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Article card hover */
+.article-list--tile article {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.article-list--tile article:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 20px 60px rgba(124, 179, 66, 0.3) !important;
+    border-color: var(--accent-color) !important;
+}
+
+[data-scheme="dark"] .article-list--tile article:hover {
+    box-shadow: 0 20px 60px rgba(244, 166, 35, 0.35) !important;
+}
+
+/* Sidebar emoji animation */
+.sidebar .site-avatar {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.sidebar .site-avatar:hover {
+    transform: scale(1.2) rotate(12deg) !important;
+}
+
+/* Menu hover */
+.menu .menu-item {
+    transition: all 0.2s ease !important;
+}
+
+.menu .menu-item:hover {
+    transform: translateX(8px) !important;
+}
+
+.menu .menu-item:hover a {
+    color: var(--accent-color) !important;
+}
+
+/* Tag cloud */
+.tagCloud-tags a {
+    transition: all 0.3s ease !important;
+}
+
+.tagCloud-tags a:hover {
+    background: var(--accent-color) !important;
+    color: white !important;
+    transform: scale(1.12) rotate(-2deg) !important;
+    box-shadow: 0 6px 20px rgba(124, 179, 66, 0.35);
+}
+
+[data-scheme="dark"] .tagCloud-tags a:hover {
+    box-shadow: 0 6px 20px rgba(244, 166, 35, 0.35);
+}
+
+/* Links */
+a {
+    color: var(--accent-color) !important;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-color-darker) !important;
+}
+
+/* Buttons */
+button, .button {
+    background: var(--accent-color) !important;
+    color: white !important;
+    transition: all 0.3s ease !important;
+}
+
+button:hover, .button:hover {
+    background: var(--accent-color-darker) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(124, 179, 66, 0.3);
+}
+
+/* Main container */
+.main-container {
+    background: transparent !important;
+}
+
+.main-container, .sidebar {
+    position: relative;
+    z-index: 1;
+}

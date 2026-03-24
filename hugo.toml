@@ -8,6 +8,7 @@ hasCJKLanguage = true
 [params]
 mainSections = ['posts']
 rssFullContent = true
+customCSS = ['css/custom.css']
 
 [params.footer]
 since = 2026
@@ -16,7 +17,7 @@ customText = '牧屋 MUWU'
 [params.sidebar]
 emoji = '🏠'
 subtitle = '独立游戏开发者 | Unity & C#'
-avatar = ''
+avatar = 'img/avatar.png'
 
 [params.article]
 math = false
