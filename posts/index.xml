@@ -1,36 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 牧屋 MUWU</title><link>https://muwustudio.github.io/posts/</link><description>Recent content in Posts on 牧屋 MUWU</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 24 Mar 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://muwustudio.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>你好，牧屋！</title><link>https://muwustudio.github.io/posts/hello-muwu/</link><pubDate>Tue, 24 Mar 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/hello-muwu/</guid><description>&lt;h2 id="-关于我"&gt;👋 关于我
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 牧屋 MUWU</title><link>https://muwustudio.github.io/posts/</link><description>Recent content in Posts on 牧屋 MUWU</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 24 Mar 2026 14:00:00 +0800</lastBuildDate><atom:link href="https://muwustudio.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>MMORPG开发日志01：背包系统的设计与实现</title><link>https://muwustudio.github.io/posts/mmorpg-devlog-01/</link><pubDate>Tue, 24 Mar 2026 14:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/mmorpg-devlog-01/</guid><description>&lt;img src="https://muwustudio.github.io/" alt="Featured image of post MMORPG开发日志01：背包系统的设计与实现" /&gt;&lt;h2 id="今天做了什么"&gt;今天做了什么？
+&lt;/h2&gt;&lt;p&gt;完成了MMORPG项目的背包系统，支持物品添加、删除、堆叠和排序。&lt;/p&gt;
+&lt;h2 id="技术设计"&gt;技术设计
+&lt;/h2&gt;&lt;p&gt;使用List存储物品列表，ScriptableObject定义物品模板。&lt;/p&gt;
+&lt;h2 id="遇到的问题"&gt;遇到的问题
+&lt;/h2&gt;&lt;h3 id="问题1物品堆叠溢出"&gt;问题1：物品堆叠溢出
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;现象：&lt;/strong&gt; 背包满时继续拾取可堆叠物品，数量会超过上限。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt; 在AddItem方法中添加堆叠上限检查。&lt;/p&gt;
+&lt;h3 id="问题2ui刷新不及时"&gt;问题2：UI刷新不及时
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;现象：&lt;/strong&gt; 拖拽物品后UI显示不同步。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt; 使用观察者模式，数据变更时触发UI刷新事件。&lt;/p&gt;
+&lt;h2 id="ai的帮助"&gt;AI的帮助
+&lt;/h2&gt;&lt;p&gt;用Cursor IDE加速了代码编写，用Ollama帮我Review了核心逻辑。&lt;/p&gt;
+&lt;h2 id="下一步计划"&gt;下一步计划
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;实现装备系统&lt;/li&gt;
+&lt;li&gt;添加物品排序功能&lt;/li&gt;
+&lt;li&gt;优化UI拖拽手感&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>你好，牧屋！独立游戏开发之旅启航</title><link>https://muwustudio.github.io/posts/hello-muwu/</link><pubDate>Tue, 24 Mar 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/hello-muwu/</guid><description>&lt;img src="https://muwustudio.github.io/" alt="Featured image of post 你好，牧屋！独立游戏开发之旅启航" /&gt;&lt;h2 id="-关于我"&gt;👋 关于我
 &lt;/h2&gt;&lt;p&gt;我是一名23岁的独立游戏开发者，正在学习Unity和C#。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;牧屋（MUWU）&lt;/strong&gt; 这个名字来源于&amp;quot;牧羊人的屋子&amp;quot;，代表着在广阔草原上自由创作的精神。&lt;/p&gt;
-&lt;h2 id="-我在做什么"&gt;🎯 我在做什么
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;📚 学习Unity游戏开发&lt;/li&gt;
-&lt;li&gt;🎮 开发MMORPG学习项目&lt;/li&gt;
-&lt;li&gt;🤖 探索AI在游戏开发中的应用&lt;/li&gt;
-&lt;li&gt;✍️ 记录开发日志和技术笔记&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="-技术栈"&gt;🛠️ 技术栈
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;游戏开发：&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="-为什么做游戏"&gt;🎯 为什么做游戏？
+&lt;/h2&gt;&lt;p&gt;从小玩过的游戏塑造了我：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Unity游戏引擎&lt;/li&gt;
-&lt;li&gt;C#编程语言&lt;/li&gt;
-&lt;li&gt;Git版本管理&lt;/li&gt;
+&lt;li&gt;《塞尔达传说》教会我探索的乐趣&lt;/li&gt;
+&lt;li&gt;《星露谷物语》让我看到一个人也能做出伟大作品&lt;/li&gt;
+&lt;li&gt;《空洞骑士》展示了独立游戏的极致美学&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;AI工具：&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="-我在学什么"&gt;🛠️ 我在学什么？
+&lt;/h2&gt;&lt;p&gt;目前正在系统学习：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Cursor IDE（AI编程助手）&lt;/li&gt;
-&lt;li&gt;Ollama（本地大模型）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Unity游戏引擎&lt;/strong&gt; - 主力开发工具&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;C#编程语言&lt;/strong&gt; - 游戏逻辑的基础&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI工具&lt;/strong&gt; - Cursor、Ollama等辅助开发&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="-联系方式"&gt;📮 联系方式
+&lt;h2 id="-这个博客会记录什么"&gt;🏠 这个博客会记录什么？
 &lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;GitHub：&lt;a class="link" href="https://github.com/muwustudio" target="_blank" rel="noopener"
- &gt;@muwustudio&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;游戏开发日志&lt;/li&gt;
+&lt;li&gt;技术学习笔记&lt;/li&gt;
+&lt;li&gt;AI工具实践&lt;/li&gt;
+&lt;li&gt;独立游戏开发的思考&lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr&gt;
-
- &lt;blockquote&gt;
- &lt;p&gt;&lt;em&gt;&amp;ldquo;在草原上放牧创意，让每一个想法都有落地的地方。&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
-
- &lt;/blockquote&gt;</description></item><item><title>读书笔记 #01：《第一性原理》</title><link>https://muwustudio.github.io/posts/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86/</link><pubDate>Tue, 24 Mar 2026 00:00:00 +0000</pubDate><guid>https://muwustudio.github.io/posts/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86/</guid><description>&lt;h1 id="第一性原理"&gt;《第一性原理》
+&lt;p&gt;欢迎关注牧屋的旅程！&lt;/p&gt;</description></item><item><title>读书笔记 #01：《第一性原理》</title><link>https://muwustudio.github.io/posts/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86/</link><pubDate>Tue, 24 Mar 2026 00:00:00 +0000</pubDate><guid>https://muwustudio.github.io/posts/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86/</guid><description>&lt;h1 id="第一性原理"&gt;《第一性原理》
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;h2 id="归纳法与演绎法"&gt;归纳法与演绎法
