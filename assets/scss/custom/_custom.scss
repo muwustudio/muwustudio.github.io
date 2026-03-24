@@ -1,46 +1,244 @@
-/* 牧屋主题色 */
+/* ===================================
+   牧屋 MUWU 主题配色
+   草原绿 + 琥珀金 + 深夜蓝
+   =================================== */
+
 :root {
-    /* 浅色模式 */
-    --accent-color: #7CB342;  /* 草原绿 */
-    --accent-color-darker: #5a8c2f;
+    /* 主色调 - 浅色模式 */
+    --accent-color: #7CB342;              /* 草原绿 */
+    --accent-color-darker: #5a8c2f;       
     --accent-color-text: #fff;
+    
+    /* 背景和卡片 */
     --card-background: #fff;
-    --body-background: #f5f5f5;
+    --body-background: #f8f9fa;
+    --card-background-selected: #f5f8f5;
+    
+    /* 文字颜色 */
+    --body-text-color: #2d3748;
+    --article-title-color: #1a202c;
+    
+    /* 边框和分隔线 */
+    --card-border-color: rgba(124, 179, 66, 0.1);
+    
+    /* 代码块 */
+    --code-background-color: #f7fafc;
+    --code-text-color: #2d3748;
 }
 
 /* 暗色模式 */
 [data-scheme="dark"] {
-    --accent-color: #F4A623;  /* 琥珀金 */
+    --accent-color: #F4A623;              /* 琥珀金 */
     --accent-color-darker: #d48a0f;
+    --accent-color-text: #1a1a2e;
+    
     --card-background: #1e1e2e;
-    --body-background: #0f0f1a;
+    --body-background: #121218;
+    --card-background-selected: #252535;
+    
+    --body-text-color: #e0e0e0;
+    --article-title-color: #f5f5f5;
+    
+    --card-border-color: rgba(244, 166, 35, 0.1);
+    
+    --code-background-color: #2d2d3d;
+    --code-text-color: #e0e0e0;
 }
 
-/* 首页文章卡片悬停效果 */
+/* ===================================
+   首页文章卡片样式优化
+   =================================== */
+
+/* 卡片悬停效果 */
 .article-list--tile article {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--card-border-color);
 }
 
 .article-list--tile article:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 40px rgba(124, 179, 66, 0.15);
+    border-color: var(--accent-color);
 }
 
-/* 侧边栏头像动画 */
-.sidebar .site-avatar .avatar-image {
+[data-scheme="dark"] .article-list--tile article:hover {
+    box-shadow: 0 12px 40px rgba(244, 166, 35, 0.15);
+}
+
+/* 文章标题样式 */
+.article-list--tile .article-title {
+    color: var(--article-title-color);
+    transition: color 0.2s ease;
+}
+
+.article-list--tile article:hover .article-title {
+    color: var(--accent-color);
+}
+
+/* ===================================
+   侧边栏样式优化
+   =================================== */
+
+/* 侧边栏emoji/头像动画 */
+.sidebar .site-avatar {
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.sidebar .site-avatar:hover .avatar-image {
+.sidebar .site-avatar:hover {
     transform: scale(1.1) rotate(5deg);
 }
 
-/* 标签云样式优化 */
-.tagCloud-tags a {
+/* 侧边栏标题 */
+.sidebar .site-name {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+/* 侧边栏副标题 */
+.sidebar .site-description {
+    color: var(--body-text-color);
+    opacity: 0.8;
+}
+
+/* 菜单项悬停效果 */
+.menu .menu-item a {
     transition: all 0.2s ease;
 }
 
-.tagCloud-tags a:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.menu .menu-item:hover a {
+    color: var(--accent-color);
+    transform: translateX(5px);
 }
+
+/* 社交链接图标 */
+.social-menu a {
+    transition: all 0.3s ease;
+}
+
+.social-menu a:hover {
+    color: var(--accent-color);
+    transform: scale(1.2);
+}
+
+/* ===================================
+   标签云样式优化
+   =================================== */
+
+.tagCloud-tags a {
+    transition: all 0.2s ease;
+    background: var(--card-background);
+    border: 1px solid var(--card-border-color);
+}
+
+.tagCloud-tags a:hover {
+    background: var(--accent-color);
+    color: var(--accent-color-text);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===================================
+   文章内容样式优化
+   =================================== */
+
+/* 链接样式 */
+.article-content a {
+    color: var(--accent-color);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.article-content a:hover {
+    border-bottom-color: var(--accent-color);
+}
+
+/* 引用块样式 */
+.article-content blockquote {
+    border-left: 4px solid var(--accent-color);
+    background: var(--card-background-selected);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+}
+
+/* 代码块样式 */
+.article-content pre {
+    background: var(--code-background-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 8px;
+}
+
+/* 表格样式 */
+.article-content table {
+    border: 1px solid var(--card-border-color);
+}
+
+.article-content th {
+    background: var(--accent-color);
+    color: var(--accent-color-text);
+}
+
+/* ===================================
+   页脚样式
+   =================================== */
+
+.site-footer {
+    border-top: 2px solid var(--accent-color);
+}
+
+/* ===================================
+   搜索框样式
+   =================================== */
+
+.search-form input {
+    border: 2px solid var(--card-border-color);
+    transition: border-color 0.2s ease;
+}
+
+.search-form input:focus {
+    border-color: var(--accent-color);
+}
+
+/* ===================================
+   分页按钮样式
+   =================================== */
+
+.pagination .page-item.active .page-link {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+/* ===================================
+   响应式优化
+   =================================== */
+
+@media (max-width: 768px) {
+    .article-list--tile article:hover {
+        transform: translateY(-4px);
+    }
+}
+
+/* ===================================
+   自定义装饰元素
+   =================================== */
+
+/* 页面加载动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.article-list--tile article {
+    animation: fadeIn 0.5s ease;
+}
+
+/* 为不同位置的文章添加延迟 */
+.article-list--tile article:nth-child(1) { animation-delay: 0.1s; }
+.article-list--tile article:nth-child(2) { animation-delay: 0.2s; }
+.article-list--tile article:nth-child(3) { animation-delay: 0.3s; }
+.article-list--tile article:nth-child(4) { animation-delay: 0.4s; }

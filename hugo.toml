@@ -1,0 +1,100 @@
+baseURL = 'https://muwustudio.github.io/'
+languageCode = 'zh-cn'
+title = '牧屋 MUWU'
+theme = 'stack'
+paginate = 10
+hasCJKLanguage = true
+
+[params]
+mainSections = ['posts']
+rssFullContent = true
+
+[params.footer]
+since = 2026
+customText = '牧屋 MUWU'
+
+[params.sidebar]
+emoji = '🏠'
+subtitle = '独立游戏开发者 | Unity & C#'
+avatar = ''
+
+[params.article]
+math = false
+toc = true
+readingTime = true
+
+[[params.widgets.homepage]]
+type = 'search'
+
+[[params.widgets.homepage]]
+type = 'archives'
+[params.widgets.homepage.params]
+limit = 5
+
+[[params.widgets.homepage]]
+type = 'categories'
+[params.widgets.homepage.params]
+limit = 10
+
+[[params.widgets.homepage]]
+type = 'tag-cloud'
+[params.widgets.homepage.params]
+limit = 10
+
+[[params.widgets.page]]
+type = 'toc'
+
+[params.comments]
+enabled = false
+
+[params.colorScheme]
+toggle = true
+default = 'auto'
+
+[menu]
+[[menu.main]]
+identifier = 'home'
+name = '首页'
+url = '/'
+weight = -100
+[menu.main.params]
+icon = 'home'
+
+[[menu.main]]
+identifier = 'archives'
+name = '归档'
+url = '/archives/'
+weight = -90
+[menu.main.params]
+icon = 'archives'
+
+[[menu.main]]
+identifier = 'categories'
+name = '分类'
+url = '/categories/'
+weight = -80
+[menu.main.params]
+icon = 'categories'
+
+[[menu.main]]
+identifier = 'tags'
+name = '标签'
+url = '/tags/'
+weight = -70
+[menu.main.params]
+icon = 'tag'
+
+[[menu.main]]
+identifier = 'about'
+name = '关于'
+url = '/about/'
+weight = -50
+[menu.main.params]
+icon = 'user'
+
+[[menu.social]]
+identifier = 'github'
+name = 'GitHub'
+url = 'https://github.com/muwustudio'
+[menu.social.params]
+icon = 'brand-github'
