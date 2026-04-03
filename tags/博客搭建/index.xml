@@ -93,7 +93,7 @@
 &lt;h3 id="3-安装hugo"&gt;3. 安装Hugo
 &lt;/h3&gt;&lt;p&gt;打开PowerShell，执行：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;powershell winget install Hugo.Hugo.Extended &lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;安装完成后验证：&lt;/p&gt;
+&lt;p&gt;安装完成后重启PowerShell，验证：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;powershell hugo version &lt;/code&gt;&lt;/p&gt;
 
  &lt;blockquote&gt;

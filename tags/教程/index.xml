@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>新手教程 on 牧屋 MUWU</title><link>https://muwustudio.github.io/tags/%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B/</link><description>Recent content in 新手教程 on 牧屋 MUWU</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 25 Mar 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://muwustudio.github.io/tags/%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>02独立开发者的第一步：从零搭建你的专属技术博客</title><link>https://muwustudio.github.io/posts/02%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA%E4%BD%A0%E7%9A%84%E4%B8%93%E5%B1%9E%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/</link><pubDate>Wed, 25 Mar 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/02%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA%E4%BD%A0%E7%9A%84%E4%B8%93%E5%B1%9E%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/</guid><description>&lt;img src="https://muwustudio.github.io/" alt="Featured image of post 02独立开发者的第一步：从零搭建你的专属技术博客" /&gt;&lt;h2 id="为什么我要搭建个人博客"&gt;为什么我要搭建个人博客？
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>教程 on 牧屋 MUWU</title><link>https://muwustudio.github.io/tags/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on 牧屋 MUWU</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 25 Mar 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://muwustudio.github.io/tags/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>02独立开发者的第一步：从零搭建你的专属技术博客</title><link>https://muwustudio.github.io/posts/02%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA%E4%BD%A0%E7%9A%84%E4%B8%93%E5%B1%9E%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/</link><pubDate>Wed, 25 Mar 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/02%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA%E4%BD%A0%E7%9A%84%E4%B8%93%E5%B1%9E%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/</guid><description>&lt;img src="https://muwustudio.github.io/" alt="Featured image of post 02独立开发者的第一步：从零搭建你的专属技术博客" /&gt;&lt;h2 id="为什么我要搭建个人博客"&gt;为什么我要搭建个人博客？
 &lt;/h2&gt;&lt;p&gt;作为一名独立游戏开发者，我一直想拥有一个属于自己的技术博客。&lt;/p&gt;
 &lt;p&gt;不是寄居在CSDN或掘金上的一亩三分地——那些平台虽然方便，但你的内容被算法控制，页面充斥着广告，而且你永远不知道哪天平台会改变规则。&lt;/p&gt;
 &lt;p&gt;我想要的是一个&lt;strong&gt;完全属于自己的空间&lt;/strong&gt;：&lt;/p&gt;
@@ -93,7 +93,7 @@
 &lt;h3 id="3-安装hugo"&gt;3. 安装Hugo
 &lt;/h3&gt;&lt;p&gt;打开PowerShell，执行：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;powershell winget install Hugo.Hugo.Extended &lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;安装完成后验证：&lt;/p&gt;
+&lt;p&gt;安装完成后重启PowerShell，验证：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;powershell hugo version &lt;/code&gt;&lt;/p&gt;
 
  &lt;blockquote&gt;

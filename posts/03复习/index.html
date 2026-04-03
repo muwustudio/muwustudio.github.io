@@ -1,0 +1,1154 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="适用项目：Unity MMORPG客户端开发"><title>03MMORPG项目-C#复习手册</title><link rel=canonical href=https://muwustudio.github.io/posts/03%E5%A4%8D%E4%B9%A0/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href=/scss/style.min.389e156f5e9bb13df5a924cfa99dfb9c39f3e01e68d9e146cd65bdae963be145.css><meta property='og:title' content="03MMORPG项目-C#复习手册"><meta property='og:description' content="适用项目：Unity MMORPG客户端开发"><meta property='og:url' content='https://muwustudio.github.io/posts/03%E5%A4%8D%E4%B9%A0/'><meta property='og:site_name' content='牧屋 MUWU'><meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='MMORPG'><meta property='article:tag' content='游戏项目'><meta property='article:tag' content='笔记'><meta property='article:published_time' content='2026-04-02T10:00:00+08:00'><meta property='article:modified_time' content='2026-04-02T10:00:00+08:00'><meta name=twitter:title content="03MMORPG项目-C#复习手册"><meta name=twitter:description content="适用项目：Unity MMORPG客户端开发"><style>:root{--accent-color:#7CB342 !important;--accent-color-darker:#5a8c2f !important}[data-scheme=dark]{--accent-color:#F4A623 !important;--accent-color-darker:#d48a0f !important}body{background:linear-gradient(rgba(248,250,245,.75),rgba(248,250,245,.85)),url(https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=1920&q=80)50%/cover fixed!important}[data-scheme=dark] body{background:#0a0a15!important}.stars-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;display:none}[data-scheme=dark] .stars-container{display:block}.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle 3s infinite}@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}.sidebar,.article-list--tile article,.widget{background:rgba(255,255,255,.88)!important;backdrop-filter:blur(20px);border:1px solid rgba(124,179,66,.25)!important}[data-scheme=dark] .sidebar,[data-scheme=dark] .article-list--tile article,[data-scheme=dark] .widget{background:rgba(20,20,35,.88)!important;border:1px solid rgba(244,166,35,.25)!important}.article-list--tile article:hover{transform:translateY(-10px)!important;box-shadow:0 20px 60px rgba(124,179,66,.3)!important}[data-scheme=dark] .article-list--tile article:hover{box-shadow:0 20px 60px rgba(244,166,35,.35)!important}.sidebar .site-avatar:hover{transform:scale(1.2)rotate(12deg)!important}.menu .menu-item:hover{transform:translateX(8px)!important}.menu .menu-item:hover a{color:var(--accent-color)!important}.tagCloud-tags a:hover{background:var(--accent-color)!important;color:#fff!important;transform:scale(1.12)!important}a{color:var(--accent-color)!important}.main-container{background:0 0!important}.main-container,.sidebar{position:relative;z-index:1}</style><script>(function(){function e(){let e=document.querySelector(".stars-container");e&&e.remove(),e=document.createElement("div"),e.className="stars-container",document.body.insertBefore(e,document.body.firstChild);for(let n=0;n<150;n++){const t=document.createElement("div");t.className="star";const s=Math.random();s<.6?t.style.width=t.style.height="1px":s<.9?t.style.width=t.style.height="2px":(t.style.width=t.style.height="3px",t.style.boxShadow="0 0 4px white"),t.style.left=Math.random()*100+"%",t.style.top=Math.random()*100+"%",t.style.animationDelay=Math.random()*3+"s",t.style.animationDuration=2+Math.random()*2+"s",e.appendChild(t)}}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",e):e()})()</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar.png width=1024 height=1024 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🏠</span></figure><div class=site-meta><h1 class=site-name><a href=/>牧屋 MUWU</a></h1><h2 class=site-description>独立游戏开发者 | Unity & C#</h2></div></header><ol class=menu-social><li><a href=https://github.com/muwustudio title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>首页</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/categories/><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+<span>分类</span></a></li><li><a href=/tags/><svg class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11 3l9 9a1.5 1.5.0 010 2l-6 6a1.5 1.5.0 01-2 0L3 11V7a4 4 0 014-4h4"/><circle cx="9" cy="9" r="2"/></svg>
+<span>标签</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav class=toc-nav id=TableOfContents><ul><li><a href=#11-变量与数据类型>1.1 变量与数据类型</a></li><li><a href=#12-运算符>1.2 运算符</a></li><li><a href=#13-条件判断>1.3 条件判断</a></li><li><a href=#14-循环>1.4 循环</a></li><li><a href=#15-方法函数>1.5 方法（函数）</a></li></ul><ul><li><a href=#21-类与对象>2.1 类与对象</a></li><li><a href=#22-继承inheritance>2.2 继承（Inheritance）</a></li><li><a href=#23-接口interface>2.3 接口（Interface）</a></li><li><a href=#24-访问修饰符速查>2.4 访问修饰符速查</a></li></ul><ul><li><a href=#31-monobehaviour-生命周期>3.1 MonoBehaviour 生命周期</a></li><li><a href=#32-协程coroutine>3.2 协程（Coroutine）</a></li><li><a href=#33-委托与事件event>3.3 委托与事件（Event）</a></li><li><a href=#34-常用unity-api速查>3.4 常用Unity API速查</a></li></ul><ul><li><a href=#41-单例模式singleton>4.1 单例模式（Singleton）⭐⭐⭐</a></li><li><a href=#42-状态机state-machine>4.2 状态机（State Machine）⭐⭐⭐</a></li><li><a href=#43-对象池object-pool>4.3 对象池（Object Pool）⭐⭐⭐</a></li><li><a href=#44-scriptableobject-数据配置->4.4 ScriptableObject 数据配置 ⭐⭐⭐</a></li><li><a href=#45-观察者模式用于任务系统等>4.5 观察者模式（用于任务系统等）⭐⭐</a></li></ul><ul><li><a href=#51-listt列表>5.1 List&lt;T>（列表）</a></li><li><a href=#52-dictionarytkey-tvalue字典>5.2 Dictionary&lt;TKey, TValue>（字典）</a></li><li><a href=#53-queuet队列和-stackt栈>5.3 Queue&lt;T>（队列）和 Stack&lt;T>（栈）</a></li></ul><ul><li><a href=#61-最常见的报错>6.1 最常见的报错</a></li><li><a href=#62-字符串拼接的几种方式>6.2 字符串拼接的几种方式</a></li><li><a href=#63-调试技巧>6.3 调试技巧</a></li><li><a href=#64-常用的-mathf-工具方法>6.4 常用的 Mathf 工具方法</a></li></ul><ul><li><a href=#c关键字速查>C#关键字速查</a></li><li><a href=#unity-特性标签速查>Unity 特性标签速查</a></li></ul></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/ style=background-color:#beefe1;color:#0f3d30>技术笔记</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/03%E5%A4%8D%E4%B9%A0/>03MMORPG项目-C#复习手册</a></h2><h3 class=article-subtitle>适用项目：Unity MMORPG客户端开发</h3></div><footer class=article-meta><div class=inline-meta><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-04-02T10:00:00+08:00>Thursday, April 2, 2026</time>
+<svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>18 minutes read</time></div></footer></div></header><aside class=article-toc><details><summary><div class=article-toc-title><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6-6 6"/></svg>
+<span>Table of contents</span></div></summary><nav class=toc-nav><ul><li><a href=#11-变量与数据类型>1.1 变量与数据类型</a></li><li><a href=#12-运算符>1.2 运算符</a></li><li><a href=#13-条件判断>1.3 条件判断</a></li><li><a href=#14-循环>1.4 循环</a></li><li><a href=#15-方法函数>1.5 方法（函数）</a></li></ul><ul><li><a href=#21-类与对象>2.1 类与对象</a></li><li><a href=#22-继承inheritance>2.2 继承（Inheritance）</a></li><li><a href=#23-接口interface>2.3 接口（Interface）</a></li><li><a href=#24-访问修饰符速查>2.4 访问修饰符速查</a></li></ul><ul><li><a href=#31-monobehaviour-生命周期>3.1 MonoBehaviour 生命周期</a></li><li><a href=#32-协程coroutine>3.2 协程（Coroutine）</a></li><li><a href=#33-委托与事件event>3.3 委托与事件（Event）</a></li><li><a href=#34-常用unity-api速查>3.4 常用Unity API速查</a></li></ul><ul><li><a href=#41-单例模式singleton>4.1 单例模式（Singleton）⭐⭐⭐</a></li><li><a href=#42-状态机state-machine>4.2 状态机（State Machine）⭐⭐⭐</a></li><li><a href=#43-对象池object-pool>4.3 对象池（Object Pool）⭐⭐⭐</a></li><li><a href=#44-scriptableobject-数据配置->4.4 ScriptableObject 数据配置 ⭐⭐⭐</a></li><li><a href=#45-观察者模式用于任务系统等>4.5 观察者模式（用于任务系统等）⭐⭐</a></li></ul><ul><li><a href=#51-listt列表>5.1 List&lt;T>（列表）</a></li><li><a href=#52-dictionarytkey-tvalue字典>5.2 Dictionary&lt;TKey, TValue>（字典）</a></li><li><a href=#53-queuet队列和-stackt栈>5.3 Queue&lt;T>（队列）和 Stack&lt;T>（栈）</a></li></ul><ul><li><a href=#61-最常见的报错>6.1 最常见的报错</a></li><li><a href=#62-字符串拼接的几种方式>6.2 字符串拼接的几种方式</a></li><li><a href=#63-调试技巧>6.3 调试技巧</a></li><li><a href=#64-常用的-mathf-工具方法>6.4 常用的 Mathf 工具方法</a></li></ul><ul><li><a href=#c关键字速查>C#关键字速查</a></li><li><a href=#unity-特性标签速查>Unity 特性标签速查</a></li></ul></nav></details></aside><section class=article-content><h1 id=-mmorpg项目--c-复习手册>🎮 MMORPG项目 · C# 复习手册</h1><blockquote><p>适用项目：Unity MMORPG客户端开发
+阅读建议：按章节顺序读，重点看⭐标注的内容
+更新日期：2025</p></blockquote><hr><h1 id=-目录>📚 目录</h1><ul><li><a class=link href=#%e7%ac%ac%e4%b8%80%e7%ab%a0c-%e5%9f%ba%e7%a1%80%e5%bf%ab%e9%80%9f%e5%a4%8d%e4%b9%a0>第一章：C# 基础快速复习</a></li><li><a class=link href=#%e7%ac%ac%e4%ba%8c%e7%ab%a0%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e6%a0%b8%e5%bf%83oop>第二章：面向对象核心（OOP）</a></li><li><a class=link href=#%e7%ac%ac%e4%b8%89%e7%ab%a0unity%e5%b8%b8%e7%94%a8c%e7%89%b9%e6%80%a7>第三章：Unity常用C#特性</a></li><li><a class=link href=#%e7%ac%ac%e5%9b%9b%e7%ab%a0%e6%b8%b8%e6%88%8f%e5%bc%80%e5%8f%91%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f>第四章：游戏开发设计模式</a></li><li><a class=link href=#%e7%ac%ac%e4%ba%94%e7%ab%a0%e9%a1%b9%e7%9b%ae%e5%b8%b8%e7%94%a8%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e9%80%9f%e6%9f%a5>第五章：项目常用数据结构速查</a></li><li><a class=link href=#%e7%ac%ac%e5%85%ad%e7%ab%a0%e5%b8%b8%e8%a7%81%e9%94%99%e8%af%af%e4%b8%8e%e8%b0%83%e8%af%95%e6%8a%80%e5%b7%a7>第六章：常见错误与调试技巧</a></li></ul><hr><h1 id=第一章c-基础快速复习>第一章：C# 基础快速复习</h1><h2 id=11-变量与数据类型>1.1 变量与数据类型</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 常用数据类型 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>     level   = <span style=color:#ae81ff>1</span>;          <span style=color:#75715e>// 整数：等级、数量</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>float</span>   hp      = <span style=color:#ae81ff>100.5f</span>;     <span style=color:#75715e>// 小数：血量、速度（注意要加f）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span>  ratio   = <span style=color:#ae81ff>0.85</span>;       <span style=color:#75715e>// 高精度小数（较少用）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span>    isAlive = <span style=color:#66d9ef>true</span>;       <span style=color:#75715e>// 布尔：死活、开关状态</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span>  name    = <span style=color:#e6db74>&#34;战士&#34;</span>;     <span style=color:#75715e>// 字符串：名字、描述</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>char</span>    grade   = <span style=color:#e6db74>&#39;A&#39;</span>;        <span style=color:#75715e>// 单个字符（较少用）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 类型转换 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>    a = <span style=color:#ae81ff>10</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>float</span>  b = (<span style=color:#66d9ef>float</span>)a;          <span style=color:#75715e>// 强制转换：int → float</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span> s = a.ToString();      <span style=color:#75715e>// 数字转字符串</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>    c = <span style=color:#66d9ef>int</span>.Parse(<span style=color:#e6db74>&#34;100&#34;</span>);  <span style=color:#75715e>// 字符串转数字（失败会报错）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>    d = Convert.ToInt32(<span style=color:#e6db74>&#34;100&#34;</span>); <span style=color:#75715e>// 更安全的转换方式</span>
+</span></span></code></pre></div><h2 id=12-运算符>1.2 运算符</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 算术运算符 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> a = <span style=color:#ae81ff>10</span> + <span style=color:#ae81ff>3</span>;   <span style=color:#75715e>// 13  加</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> b = <span style=color:#ae81ff>10</span> - <span style=color:#ae81ff>3</span>;   <span style=color:#75715e>// 7   减</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> c = <span style=color:#ae81ff>10</span> * <span style=color:#ae81ff>3</span>;   <span style=color:#75715e>// 30  乘</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> d = <span style=color:#ae81ff>10</span> / <span style=color:#ae81ff>3</span>;   <span style=color:#75715e>// 3   除（整数相除，小数部分丢弃！）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> e = <span style=color:#ae81ff>10</span> % <span style=color:#ae81ff>3</span>;   <span style=color:#75715e>// 1   取余（常用于判断奇偶、循环）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 常用快捷写法 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> hp = <span style=color:#ae81ff>100</span>;
+</span></span><span style=display:flex><span>hp += <span style=color:#ae81ff>20</span>;   <span style=color:#75715e>// 等于 hp = hp + 20; → hp = 120</span>
+</span></span><span style=display:flex><span>hp -= <span style=color:#ae81ff>30</span>;   <span style=color:#75715e>// 等于 hp = hp - 30; → hp = 90</span>
+</span></span><span style=display:flex><span>hp++;       <span style=color:#75715e>// 等于 hp = hp + 1;  → hp = 91</span>
+</span></span><span style=display:flex><span>hp--;       <span style=color:#75715e>// 等于 hp = hp - 1;  → hp = 90</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 比较运算符（结果是bool）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> r1 = (<span style=color:#ae81ff>5</span> &gt; <span style=color:#ae81ff>3</span>);    <span style=color:#75715e>// true</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> r2 = (<span style=color:#ae81ff>5</span> == <span style=color:#ae81ff>5</span>);   <span style=color:#75715e>// true  （注意：==是比较，=是赋值）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> r3 = (<span style=color:#ae81ff>5</span> != <span style=color:#ae81ff>3</span>);   <span style=color:#75715e>// true  （不等于）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> r4 = (<span style=color:#ae81ff>5</span> &gt;= <span style=color:#ae81ff>5</span>);   <span style=color:#75715e>// true  （大于等于）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 逻辑运算符 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> r5 = (<span style=color:#66d9ef>true</span> &amp;&amp; <span style=color:#66d9ef>false</span>);  <span style=color:#75715e>// false  （两个都true才是true）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> r6 = (<span style=color:#66d9ef>true</span> || <span style=color:#66d9ef>false</span>);  <span style=color:#75715e>// true   （有一个true就是true）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> r7 = !<span style=color:#66d9ef>true</span>;            <span style=color:#75715e>// false  （取反）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 游戏中的实际例子 =====</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 判断玩家能否攻击（活着 且 有攻击力 且 不在冷却）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> canAttack = isAlive &amp;&amp; (attackPower &gt; <span style=color:#ae81ff>0</span>) &amp;&amp; !isOnCooldown;
+</span></span></code></pre></div><hr><h2 id=13-条件判断>1.3 条件判断</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== if / else if / else =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> playerLevel = <span style=color:#ae81ff>15</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (playerLevel &gt;= <span style=color:#ae81ff>60</span>)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(<span style=color:#e6db74>&#34;满级玩家&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (playerLevel &gt;= <span style=color:#ae81ff>30</span>)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(<span style=color:#e6db74>&#34;中级玩家&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(<span style=color:#e6db74>&#34;新手玩家&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== switch（多个固定值判断时更清晰）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span> job = <span style=color:#e6db74>&#34;战士&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>switch</span> (job)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> <span style=color:#e6db74>&#34;战士&#34;</span>:
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>&#34;物理攻击职业&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> <span style=color:#e6db74>&#34;法师&#34;</span>:
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>&#34;魔法攻击职业&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> <span style=color:#e6db74>&#34;牧师&#34;</span>:
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>&#34;治疗职业&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>default</span>:
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>&#34;未知职业&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 三元运算符（简短版if-else）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span> status = (hp &gt; <span style=color:#ae81ff>0</span>) ? <span style=color:#e6db74>&#34;存活&#34;</span> : <span style=color:#e6db74>&#34;死亡&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#75715e>// 等价于：</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// if (hp &gt; 0) status = &#34;存活&#34;;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// else status = &#34;死亡&#34;;</span>
+</span></span></code></pre></div><hr><h2 id=14-循环>1.4 循环</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== for循环（知道次数时用）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>5</span>; i++)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(<span style=color:#e6db74>&#34;第&#34;</span> + i + <span style=color:#e6db74>&#34;次循环&#34;</span>);   <span style=color:#75715e>// 输出0,1,2,3,4</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== while循环（不知道次数时用）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> count = <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> (count &lt; <span style=color:#ae81ff>3</span>)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(<span style=color:#e6db74>&#34;count = &#34;</span> + count);
+</span></span><span style=display:flex><span>    count++;   <span style=color:#75715e>// ⚠️ 别忘了这句，否则死循环！</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== foreach循环（遍历集合时最常用）=====</span>
+</span></span><span style=display:flex><span>List&lt;<span style=color:#66d9ef>string</span>&gt; itemList = <span style=color:#66d9ef>new</span> List&lt;<span style=color:#66d9ef>string</span>&gt; { <span style=color:#e6db74>&#34;剑&#34;</span>, <span style=color:#e6db74>&#34;盾&#34;</span>, <span style=color:#e6db74>&#34;药水&#34;</span> };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>string</span> item <span style=color:#66d9ef>in</span> itemList)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(<span style=color:#e6db74>&#34;背包里有：&#34;</span> + item);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== break 和 continue =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>10</span>; i++)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (i == <span style=color:#ae81ff>3</span>) <span style=color:#66d9ef>continue</span>;  <span style=color:#75715e>// 跳过i=3这次，继续下一次</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (i == <span style=color:#ae81ff>7</span>) <span style=color:#66d9ef>break</span>;     <span style=color:#75715e>// i=7时直接退出整个循环</span>
+</span></span><span style=display:flex><span>    Debug.Log(i);          <span style=color:#75715e>// 输出：0,1,2,4,5,6</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=15-方法函数>1.5 方法（函数）</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 基本格式 =====</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 访问修饰符  返回类型  方法名  (参数列表)</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span>        <span style=color:#66d9ef>int</span>       Add    (<span style=color:#66d9ef>int</span> a, <span style=color:#66d9ef>int</span> b)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> a + b;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 无返回值（void）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> ShowMessage(<span style=color:#66d9ef>string</span> msg)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(msg);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 无需return（或者写 return; 直接退出）</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 有默认参数值 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Attack(<span style=color:#66d9ef>int</span> damage, <span style=color:#66d9ef>bool</span> isCritical = <span style=color:#66d9ef>false</span>)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// isCritical有默认值false，调用时可以不传</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 调用方式：</span>
+</span></span><span style=display:flex><span>Attack(<span style=color:#ae81ff>100</span>);          <span style=color:#75715e>// isCritical = false（用默认值）</span>
+</span></span><span style=display:flex><span>Attack(<span style=color:#ae81ff>100</span>, <span style=color:#66d9ef>true</span>);    <span style=color:#75715e>// isCritical = true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== out 参数（返回多个值）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>bool</span> TryGetItem(<span style=color:#66d9ef>int</span> itemId, <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>string</span> itemName)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (itemId == <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        itemName = <span style=color:#e6db74>&#34;铁剑&#34;</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    itemName = <span style=color:#e6db74>&#34;&#34;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 调用：</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (TryGetItem(<span style=color:#ae81ff>1</span>, <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>string</span> name))
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(<span style=color:#e6db74>&#34;找到了：&#34;</span> + name);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h1 id=第二章面向对象核心oop>第二章：面向对象核心（OOP）</h1><blockquote><p>⭐⭐⭐ <strong>这一章是最重要的，游戏里所有东西都是"对象"</strong></p></blockquote><h2 id=21-类与对象>2.1 类与对象</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 类的定义（模板/蓝图）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Item</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// --- 字段（Field）：存储数据 ---</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span>    id;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>string</span> itemName;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span>    count;
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// --- 属性（Property）：保护字段，控制读写 ---</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Id
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span> { <span style=color:#66d9ef>return</span> id; }           <span style=color:#75715e>// 允许读</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 注意：没有set，外部不能修改Id</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> ItemName
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span> { <span style=color:#66d9ef>return</span> itemName; }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span> { itemName = <span style=color:#66d9ef>value</span>; }    <span style=color:#75715e>// 允许读写</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Count
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span> { <span style=color:#66d9ef>return</span> count; }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>value</span> &lt; <span style=color:#ae81ff>0</span>) <span style=color:#66d9ef>value</span> = <span style=color:#ae81ff>0</span>;  <span style=color:#75715e>// 数量不能为负</span>
+</span></span><span style=display:flex><span>            count = <span style=color:#66d9ef>value</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// --- 构造函数（new的时候执行）---</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Item(<span style=color:#66d9ef>int</span> id, <span style=color:#66d9ef>string</span> name, <span style=color:#66d9ef>int</span> count)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.id       = id;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.itemName = name;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.count    = count;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// --- 方法 ---</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Use()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (count &lt;= <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Debug.Log(<span style=color:#e6db74>&#34;道具数量不足！&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        count--;
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>$&#34;使用了{itemName}，剩余{count}个&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 字符串插值：$&#34;文字{变量}文字&#34; 比 &#34;文字&#34; + 变量 更方便</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 使用对象 =====</span>
+</span></span><span style=display:flex><span>Item sword = <span style=color:#66d9ef>new</span> Item(<span style=color:#ae81ff>1001</span>, <span style=color:#e6db74>&#34;铁剑&#34;</span>, <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>Item potion = <span style=color:#66d9ef>new</span> Item(<span style=color:#ae81ff>2001</span>, <span style=color:#e6db74>&#34;红药水&#34;</span>, <span style=color:#ae81ff>10</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>sword.Use();
+</span></span><span style=display:flex><span>Debug.Log(potion.Count);  <span style=color:#75715e>// 10</span>
+</span></span></code></pre></div><hr><h2 id=22-继承inheritance>2.2 继承（Inheritance）</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 父类（基类）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Character</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> Name     { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>set</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span>    MaxHP    { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>set</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span>    CurrentHP{ <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>set</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span>    AttackPower { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>set</span>; }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Character(<span style=color:#66d9ef>string</span> name, <span style=color:#66d9ef>int</span> maxHP, <span style=color:#66d9ef>int</span> attackPower)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Name        = name;
+</span></span><span style=display:flex><span>        MaxHP       = maxHP;
+</span></span><span style=display:flex><span>        CurrentHP   = maxHP;
+</span></span><span style=display:flex><span>        AttackPower = attackPower;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// virtual 表示子类可以重写这个方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> Attack(Character target)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        target.TakeDamage(AttackPower);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> TakeDamage(<span style=color:#66d9ef>int</span> damage)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        CurrentHP -= damage;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (CurrentHP &lt; <span style=color:#ae81ff>0</span>) CurrentHP = <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>$&#34;{Name} 受到 {damage} 点伤害，剩余HP：{CurrentHP}&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 子类（派生类）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Warrior</span> : Character
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Armor { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>set</span>; }   <span style=color:#75715e>// 战士独有：护甲</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// base(...) 调用父类构造函数</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Warrior(<span style=color:#66d9ef>string</span> name) : <span style=color:#66d9ef>base</span>(name, <span style=color:#ae81ff>1000</span>, <span style=color:#ae81ff>150</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Armor = <span style=color:#ae81ff>50</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// override 重写父类方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>void</span> TakeDamage(<span style=color:#66d9ef>int</span> damage)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> realDamage = Mathf.Max(<span style=color:#ae81ff>0</span>, damage - Armor); <span style=color:#75715e>// 护甲减伤</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>base</span>.TakeDamage(realDamage);  <span style=color:#75715e>// 调用父类的TakeDamage</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 战士专属技能</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> ShieldBash(Character target)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        target.TakeDamage(AttackPower / <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>$&#34;{Name} 使用了盾击！&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Mage</span> : Character
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Mana { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>set</span>; }    <span style=color:#75715e>// 法师独有：魔力</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Mage(<span style=color:#66d9ef>string</span> name) : <span style=color:#66d9ef>base</span>(name, <span style=color:#ae81ff>600</span>, <span style=color:#ae81ff>300</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Mana = <span style=color:#ae81ff>500</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>void</span> Attack(Character target)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 法师攻击消耗魔力</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (Mana &lt; <span style=color:#ae81ff>20</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Debug.Log(<span style=color:#e6db74>&#34;魔力不足！&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        Mana -= <span style=color:#ae81ff>20</span>;
+</span></span><span style=display:flex><span>        target.TakeDamage(AttackPower);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 多态：用父类类型装各种子类 =====</span>
+</span></span><span style=display:flex><span>Character player1 = <span style=color:#66d9ef>new</span> Warrior(<span style=color:#e6db74>&#34;张三&#34;</span>);
+</span></span><span style=display:flex><span>Character player2 = <span style=color:#66d9ef>new</span> Mage(<span style=color:#e6db74>&#34;李四&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 调用同一个方法，但执行的是各自重写后的版本</span>
+</span></span><span style=display:flex><span>player1.TakeDamage(<span style=color:#ae81ff>100</span>);  <span style=color:#75715e>// 战士：减去护甲后受伤</span>
+</span></span><span style=display:flex><span>player2.TakeDamage(<span style=color:#ae81ff>100</span>);  <span style=color:#75715e>// 法师：直接受100伤</span>
+</span></span></code></pre></div><hr><h2 id=23-接口interface>2.3 接口（Interface）</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 接口：定义&#34;能做什么&#34;的规范 =====</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 可以受伤的接口</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>IDamageable</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> TakeDamage(<span style=color:#66d9ef>int</span> damage);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span>  CurrentHP { <span style=color:#66d9ef>get</span>; }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 可以被交互的接口（NPC、宝箱等）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>IInteractable</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Interact(GameObject player);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>string</span> GetInteractPrompt();   <span style=color:#75715e>// 返回提示文字，如&#34;按F交互&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 可以被拾取的接口</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>IPickable</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnPickup(GameObject player);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 实现接口 =====</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 类可以同时实现多个接口</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Monster</span> : MonoBehaviour, IDamageable
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> CurrentHP { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>set</span>; } = <span style=color:#ae81ff>200</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> TakeDamage(<span style=color:#66d9ef>int</span> damage)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        CurrentHP -= damage;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (CurrentHP &lt;= <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Die();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> Die()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>&#34;怪物死亡！&#34;</span>);
+</span></span><span style=display:flex><span>        Destroy(gameObject);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DroppedItem</span> : MonoBehaviour, IInteractable, IPickable
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>string</span> itemName = <span style=color:#e6db74>&#34;金币&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> GetInteractPrompt()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>$&#34;按F拾取{itemName}&#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Interact(GameObject player)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        OnPickup(player);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> OnPickup(GameObject player)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>$&#34;{player.name} 拾取了 {itemName}&#34;</span>);
+</span></span><span style=display:flex><span>        Destroy(gameObject);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 接口的好处：统一处理不同类型 =====</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 不管是玩家还是怪物，只要实现了IDamageable，都可以这样处理：</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> DealDamage(IDamageable target, <span style=color:#66d9ef>int</span> damage)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    target.TakeDamage(damage);  <span style=color:#75715e>// 不用管target是玩家还是怪物</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=24-访问修饰符速查>2.4 访问修饰符速查</h2><div class=table-wrapper><table><thead><tr><th>修饰符</th><th>能访问的地方</th><th>游戏开发用途</th></tr></thead><tbody><tr><td><code>public</code></td><td>任何地方</td><td>对外公开的属性和方法</td></tr><tr><td><code>private</code></td><td>只有自己类内部</td><td>保护内部数据</td></tr><tr><td><code>protected</code></td><td>自己和子类</td><td>父类给子类用的方法</td></tr><tr><td><code>internal</code></td><td>同一个程序集</td><td>较少用</td></tr><tr><td><code>[SerializeField]</code></td><td>Unity特有：私有但Inspector可见</td><td><strong>最常用！</strong></td></tr></tbody></table></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlayerStats</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span>  <span style=color:#66d9ef>string</span> playerName;         <span style=color:#75715e>// Inspector可见，外部可访问</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span>    secretData;         <span style=color:#75715e>// Inspector不可见，外部不可访问</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> hp = <span style=color:#ae81ff>100</span>;              <span style=color:#75715e>// Inspector可见（方便调试），但外部不能改</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> GameObject weaponPrefab;   <span style=color:#75715e>// 在Inspector拖入预制体，脚本里private保护</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h1 id=第三章unity常用c特性>第三章：Unity常用C#特性</h1><h2 id=31-monobehaviour-生命周期>3.1 MonoBehaviour 生命周期</h2><pre tabindex=0><code>游戏运行顺序：
+Awake → OnEnable → Start → Update(每帧) → OnDisable → OnDestroy
+                            FixedUpdate(物理帧)
+                            LateUpdate(Update之后)
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlayerController</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 1. Awake：最先执行，对象激活时立即调用</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//    用途：初始化自身组件引用（GetComponent）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Awake()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        rb = GetComponent&lt;Rigidbody&gt;();  <span style=color:#75715e>// 获取组件</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 2. Start：Awake之后，第一帧Update之前执行一次</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//    用途：依赖其他对象的初始化（其他对象的Awake已执行完）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Start()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        GameManager.Instance.RegisterPlayer(<span style=color:#66d9ef>this</span>); <span style=color:#75715e>// 注册到管理器</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 3. Update：每帧执行（帧率不稳定，60fps时每秒约60次）</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//    用途：处理输入、更新逻辑、检测状态</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        HandleInput();    <span style=color:#75715e>// 处理玩家输入</span>
+</span></span><span style=display:flex><span>        UpdateCooldown(); <span style=color:#75715e>// 更新冷却时间</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 4. FixedUpdate：固定时间间隔执行（默认0.02秒/次，与帧率无关）</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//    用途：物理相关（移动Rigidbody、施加力）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> FixedUpdate()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        MoveWithPhysics(); <span style=color:#75715e>// 物理移动</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 5. LateUpdate：所有Update执行完后执行</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//    用途：摄像机跟随（确保在玩家移动后再跟随）</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> LateUpdate()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        UpdateCamera(); <span style=color:#75715e>// 更新摄像机位置</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 6. OnDestroy：对象销毁时调用</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//    用途：取消事件订阅、释放资源</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnDestroy()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        GameManager.Instance.UnregisterPlayer(<span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><blockquote><p>⚠️ <strong>常见错误</strong>：在 <code>Awake</code> 里访问其他对象的组件可能为null（那个对象的Awake还没跑）
+✅ <strong>正确做法</strong>：自己的组件在 <code>Awake</code> 获取，依赖别人的在 <code>Start</code> 里操作</p></blockquote><hr><h2 id=32-协程coroutine>3.2 协程（Coroutine）</h2><blockquote><p>协程 = 可以"暂停等待"的方法，不会阻塞主线程</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 基本用法 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SkillManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 协程方法：返回类型必须是 IEnumerator</span>
+</span></span><span style=display:flex><span>    IEnumerator SkillCooldown(<span style=color:#66d9ef>float</span> cooldownTime)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        isOnCooldown = <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> WaitForSeconds(cooldownTime); <span style=color:#75715e>// ⏸ 暂停等待N秒</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        isOnCooldown = <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>&#34;冷却完毕！&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> UseSkill()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (isOnCooldown) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 执行技能效果...</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        StartCoroutine(SkillCooldown(<span style=color:#ae81ff>5f</span>)); <span style=color:#75715e>// 启动协程</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 常用的 yield return =====</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;                          <span style=color:#75715e>// 等待下一帧</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> WaitForSeconds(<span style=color:#ae81ff>2f</span>);        <span style=color:#75715e>// 等待2秒</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> WaitForFixedUpdate();      <span style=color:#75715e>// 等待下一次FixedUpdate</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> WaitUntil(() =&gt; isReady);  <span style=color:#75715e>// 等到isReady为true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 在场景切换Loading中的用法 =====</span>
+</span></span><span style=display:flex><span>IEnumerator LoadSceneWithProgress(<span style=color:#66d9ef>string</span> sceneName)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+</span></span><span style=display:flex><span>    operation.allowSceneActivation = <span style=color:#66d9ef>false</span>;  <span style=color:#75715e>// 加载完不立刻切换</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> (operation.progress &lt; <span style=color:#ae81ff>0.9f</span>)  <span style=color:#75715e>// 0.9f是Unity异步加载的最大进度</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>float</span> progress = operation.progress / <span style=color:#ae81ff>0.9f</span>;  <span style=color:#75715e>// 转换成0~1</span>
+</span></span><span style=display:flex><span>        loadingBar.fillAmount = progress;             <span style=color:#75715e>// 更新进度条</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;                            <span style=color:#75715e>// 等下一帧继续检查</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    loadingBar.fillAmount = <span style=color:#ae81ff>1f</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> WaitForSeconds(<span style=color:#ae81ff>0.5f</span>);  <span style=color:#75715e>// 等0.5秒让玩家看到100%</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    operation.allowSceneActivation = <span style=color:#66d9ef>true</span>;  <span style=color:#75715e>// 允许切换场景</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 停止协程 =====</span>
+</span></span><span style=display:flex><span>Coroutine myCoroutine = StartCoroutine(SkillCooldown(<span style=color:#ae81ff>5f</span>));
+</span></span><span style=display:flex><span>StopCoroutine(myCoroutine);  <span style=color:#75715e>// 停止指定协程</span>
+</span></span><span style=display:flex><span>StopAllCoroutines();         <span style=color:#75715e>// 停止所有协程（危险，慎用）</span>
+</span></span></code></pre></div><hr><h2 id=33-委托与事件event>3.3 委托与事件（Event）</h2><blockquote><p>事件 = 一种通知机制，&ldquo;某事发生了，通知所有关心这件事的人&rdquo;</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== Action（最常用的委托类型）=====</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Action          → 无参数无返回值</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Action&lt;T&gt;       → 有1个参数，无返回值</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Action&lt;T1,T2&gt;   → 有2个参数，无返回值</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Func&lt;T&gt;         → 无参数，有返回值T</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Func&lt;T1,T2,R&gt;   → 有参数，有返回值R</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 游戏中的事件系统实例 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlayerHealth</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 声明事件</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>event</span> Action&lt;<span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span>&gt; OnHPChanged;    <span style=color:#75715e>// 参数：当前HP，最大HP</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>event</span> Action           OnPlayerDied;    <span style=color:#75715e>// 玩家死亡事件</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> maxHP     = <span style=color:#ae81ff>100</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentHP = <span style=color:#ae81ff>100</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> TakeDamage(<span style=color:#66d9ef>int</span> damage)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        currentHP -= damage;
+</span></span><span style=display:flex><span>        currentHP  = Mathf.Clamp(currentHP, <span style=color:#ae81ff>0</span>, maxHP); <span style=color:#75715e>// 钳制在0~maxHP之间</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 触发事件，通知所有订阅者</span>
+</span></span><span style=display:flex><span>        OnHPChanged?.Invoke(currentHP, maxHP);  <span style=color:#75715e>// ?. 表示如果没人订阅就不执行</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (currentHP &lt;= <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            OnPlayerDied?.Invoke();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Heal(<span style=color:#66d9ef>int</span> amount)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        currentHP += amount;
+</span></span><span style=display:flex><span>        currentHP  = Mathf.Clamp(currentHP, <span style=color:#ae81ff>0</span>, maxHP);
+</span></span><span style=display:flex><span>        OnHPChanged?.Invoke(currentHP, maxHP);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== UI监听事件 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>HpBarUI</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> Slider   hpSlider;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> Text     hpText;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> PlayerHealth playerHealth;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Start()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        playerHealth = FindObjectOfType&lt;PlayerHealth&gt;();
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 订阅事件（+=）</span>
+</span></span><span style=display:flex><span>        playerHealth.OnHPChanged += UpdateHpBar;
+</span></span><span style=display:flex><span>        playerHealth.OnPlayerDied += ShowDeathScreen;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> UpdateHpBar(<span style=color:#66d9ef>int</span> current, <span style=color:#66d9ef>int</span> max)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        hpSlider.<span style=color:#66d9ef>value</span> = (<span style=color:#66d9ef>float</span>)current / max;
+</span></span><span style=display:flex><span>        hpText.text    = <span style=color:#e6db74>$&#34;{current}/{max}&#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> ShowDeathScreen()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 显示死亡界面</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnDestroy()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// ⚠️ 重要：取消订阅，防止内存泄漏</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (playerHealth != <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            playerHealth.OnHPChanged -= UpdateHpBar;
+</span></span><span style=display:flex><span>            playerHealth.OnPlayerDied -= ShowDeathScreen;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=34-常用unity-api速查>3.4 常用Unity API速查</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== GameObject操作 =====</span>
+</span></span><span style=display:flex><span>gameObject.SetActive(<span style=color:#66d9ef>false</span>);                      <span style=color:#75715e>// 隐藏/禁用对象</span>
+</span></span><span style=display:flex><span>gameObject.SetActive(<span style=color:#66d9ef>true</span>);                       <span style=color:#75715e>// 显示/启用对象</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span> name = gameObject.name;                    <span style=color:#75715e>// 获取对象名称</span>
+</span></span><span style=display:flex><span>gameObject.tag = <span style=color:#e6db74>&#34;Enemy&#34;</span>;                         <span style=color:#75715e>// 设置标签</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 查找对象 =====</span>
+</span></span><span style=display:flex><span>GameObject obj  = GameObject.Find(<span style=color:#e6db74>&#34;PlayerName&#34;</span>);          <span style=color:#75715e>// 按名字找（性能差，少用）</span>
+</span></span><span style=display:flex><span>GameObject obj2 = GameObject.FindWithTag(<span style=color:#e6db74>&#34;Enemy&#34;</span>);        <span style=color:#75715e>// 按标签找</span>
+</span></span><span style=display:flex><span>Enemy[] enemies = FindObjectsOfType&lt;Enemy&gt;();             <span style=color:#75715e>// 找所有Enemy组件</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 获取组件 =====</span>
+</span></span><span style=display:flex><span>Rigidbody    rb   = GetComponent&lt;Rigidbody&gt;();            <span style=color:#75715e>// 获取自身组件</span>
+</span></span><span style=display:flex><span>Animator     anim = GetComponent&lt;Animator&gt;();
+</span></span><span style=display:flex><span>AudioSource  au   = GetComponentInChildren&lt;AudioSource&gt;(); <span style=color:#75715e>// 在子对象中找</span>
+</span></span><span style=display:flex><span>Canvas       cv   = GetComponentInParent&lt;Canvas&gt;();        <span style=color:#75715e>// 在父对象中找</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 实例化和销毁 =====</span>
+</span></span><span style=display:flex><span>GameObject enemy  = Instantiate(enemyPrefab);                          <span style=color:#75715e>// 实例化</span>
+</span></span><span style=display:flex><span>GameObject enemy2 = Instantiate(enemyPrefab, spawnPos, Quaternion.identity); <span style=color:#75715e>// 在指定位置实例化</span>
+</span></span><span style=display:flex><span>Destroy(enemy);          <span style=color:#75715e>// 立即销毁</span>
+</span></span><span style=display:flex><span>Destroy(enemy, <span style=color:#ae81ff>3f</span>);      <span style=color:#75715e>// 3秒后销毁</span>
+</span></span><span style=display:flex><span>DontDestroyOnLoad(<span style=color:#66d9ef>this</span>); <span style=color:#75715e>// 切换场景不销毁（常用于管理器）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 向量和位置 =====</span>
+</span></span><span style=display:flex><span>Vector3 pos = transform.position;              <span style=color:#75715e>// 获取位置</span>
+</span></span><span style=display:flex><span>transform.position = <span style=color:#66d9ef>new</span> Vector3(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>);    <span style=color:#75715e>// 设置位置</span>
+</span></span><span style=display:flex><span>transform.Translate(Vector3.forward * speed * Time.deltaTime); <span style=color:#75715e>// 向前移动</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Time.deltaTime：上一帧到这一帧的时间差（让移动速度与帧率无关）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 调试 =====</span>
+</span></span><span style=display:flex><span>Debug.Log(<span style=color:#e6db74>&#34;普通信息&#34;</span>);
+</span></span><span style=display:flex><span>Debug.LogWarning(<span style=color:#e6db74>&#34;警告信息&#34;</span>);
+</span></span><span style=display:flex><span>Debug.LogError(<span style=color:#e6db74>&#34;错误信息&#34;</span>);
+</span></span><span style=display:flex><span>Debug.Log(<span style=color:#e6db74>$&#34;玩家HP：{currentHP}，位置：{transform.position}&#34;</span>);
+</span></span></code></pre></div><hr><h1 id=第四章游戏开发设计模式>第四章：游戏开发设计模式</h1><h2 id=41-单例模式singleton>4.1 单例模式（Singleton）⭐⭐⭐</h2><blockquote><p><strong>用途</strong>：全局唯一的管理器（游戏管理器、UI管理器、音频管理器）
+你的项目里已有 <code>MonoSingleton</code> 基类，直接继承就能用！</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 你项目里已有的MonoSingleton基类（理解原理）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MonoSingleton</span>&lt;T&gt; : MonoBehaviour <span style=color:#66d9ef>where</span> T : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> T _instance;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> T Instance
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (_instance == <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                _instance = FindObjectOfType&lt;T&gt;();
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> _instance;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> Awake()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (_instance == <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            _instance = <span style=color:#66d9ef>this</span> <span style=color:#66d9ef>as</span> T;
+</span></span><span style=display:flex><span>            DontDestroyOnLoad(gameObject); <span style=color:#75715e>// 切换场景不销毁</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Destroy(gameObject); <span style=color:#75715e>// 已有实例，销毁多余的</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 直接继承使用 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AudioManager</span> : MonoSingleton&lt;AudioManager&gt;
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> AudioSource bgmSource;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> AudioSource sfxSource;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> PlayBGM(AudioClip clip)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        bgmSource.clip = clip;
+</span></span><span style=display:flex><span>        bgmSource.Play();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> PlaySFX(AudioClip clip)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        sfxSource.PlayOneShot(clip);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> SetBGMVolume(<span style=color:#66d9ef>float</span> volume)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        bgmSource.volume = Mathf.Clamp01(volume);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 任何地方都能调用 =====</span>
+</span></span><span style=display:flex><span>AudioManager.Instance.PlayBGM(mainCityBGM);
+</span></span><span style=display:flex><span>AudioManager.Instance.PlaySFX(attackSound);
+</span></span></code></pre></div><hr><h2 id=42-状态机state-machine>4.2 状态机（State Machine）⭐⭐⭐</h2><blockquote><p><strong>用途</strong>：玩家动作状态、怪物AI、任务状态</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 方法一：简单枚举状态机（推荐新手使用）=====</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>enum</span> PlayerState
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Idle,       <span style=color:#75715e>// 待机</span>
+</span></span><span style=display:flex><span>    Running,    <span style=color:#75715e>// 跑步</span>
+</span></span><span style=display:flex><span>    Attacking,  <span style=color:#75715e>// 攻击</span>
+</span></span><span style=display:flex><span>    Casting,    <span style=color:#75715e>// 释放技能</span>
+</span></span><span style=display:flex><span>    Dead        <span style=color:#75715e>// 死亡</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlayerController</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> PlayerState currentState = PlayerState.Idle;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Animator animator;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Awake()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        animator = GetComponent&lt;Animator&gt;();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>switch</span> (currentState)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> PlayerState.Idle:
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 待机时检测输入</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (Input.anyKey) ChangeState(PlayerState.Running);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> PlayerState.Running:
+</span></span><span style=display:flex><span>                HandleMovement();
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (!Input.anyKey) ChangeState(PlayerState.Idle);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (Input.GetMouseButtonDown(<span style=color:#ae81ff>0</span>)) ChangeState(PlayerState.Attacking);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> PlayerState.Attacking:
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 攻击动画由Animator控制，这里等动画结束</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> PlayerState.Dead:
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 死亡状态不响应任何输入</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> ChangeState(PlayerState newState)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (currentState == newState) <span style=color:#66d9ef>return</span>;         <span style=color:#75715e>// 同一状态不重复切换</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (currentState == PlayerState.Dead) <span style=color:#66d9ef>return</span>; <span style=color:#75715e>// 死了不能切换状态</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 退出旧状态</span>
+</span></span><span style=display:flex><span>        OnExitState(currentState);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        currentState = newState;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 进入新状态</span>
+</span></span><span style=display:flex><span>        OnEnterState(newState);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> OnEnterState(PlayerState state)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>switch</span> (state)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> PlayerState.Idle:
+</span></span><span style=display:flex><span>                animator.SetTrigger(<span style=color:#e6db74>&#34;Idle&#34;</span>);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> PlayerState.Attacking:
+</span></span><span style=display:flex><span>                animator.SetTrigger(<span style=color:#e6db74>&#34;Attack&#34;</span>);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> PlayerState.Dead:
+</span></span><span style=display:flex><span>                animator.SetTrigger(<span style=color:#e6db74>&#34;Death&#34;</span>);
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 启动死亡后处理协程</span>
+</span></span><span style=display:flex><span>                StartCoroutine(HandleDeath());
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> OnExitState(PlayerState state)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 退出某个状态时需要做的清理</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    IEnumerator HandleDeath()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> WaitForSeconds(<span style=color:#ae81ff>2f</span>);
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 显示复活界面等操作</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=43-对象池object-pool>4.3 对象池（Object Pool）⭐⭐⭐</h2><blockquote><p><strong>用途</strong>：怪物生成、技能特效、掉落物品——频繁 Instantiate/Destroy 会卡顿！</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 通用对象池 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ObjectPool</span> : MonoSingleton&lt;ObjectPool&gt;
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 每种预制体对应一个队列</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Dictionary&lt;<span style=color:#66d9ef>string</span>, Queue&lt;GameObject&gt;&gt; poolDictionary
+</span></span><span style=display:flex><span>        = <span style=color:#66d9ef>new</span> Dictionary&lt;<span style=color:#66d9ef>string</span>, Queue&lt;GameObject&gt;&gt;();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 从池中取出对象</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> GameObject Get(GameObject prefab, Vector3 position, Quaternion rotation)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>string</span> key = prefab.name;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (!poolDictionary.ContainsKey(key))
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            poolDictionary[key] = <span style=color:#66d9ef>new</span> Queue&lt;GameObject&gt;();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        GameObject obj;
+</span></span><span style=display:flex><span>        Queue&lt;GameObject&gt; queue = poolDictionary[key];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (queue.Count &gt; <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            obj = queue.Dequeue();          <span style=color:#75715e>// 从池中取出</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            obj = Instantiate(prefab);      <span style=color:#75715e>// 池空了才创建新的</span>
+</span></span><span style=display:flex><span>            obj.name = key;                 <span style=color:#75715e>// 去掉&#34;(Clone)&#34;后缀，保持key一致</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        obj.transform.position = position;
+</span></span><span style=display:flex><span>        obj.transform.rotation = rotation;
+</span></span><span style=display:flex><span>        obj.SetActive(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> obj;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 归还对象到池</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Return(GameObject obj, <span style=color:#66d9ef>float</span> delay = <span style=color:#ae81ff>0f</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (delay &gt; <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>            StartCoroutine(ReturnAfterDelay(obj, delay));
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>            ReturnImmediate(obj);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> ReturnImmediate(GameObject obj)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>string</span> key = obj.name;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (!poolDictionary.ContainsKey(key))
+</span></span><span style=display:flex><span>            poolDictionary[key] = <span style=color:#66d9ef>new</span> Queue&lt;GameObject&gt;();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        obj.SetActive(<span style=color:#66d9ef>false</span>);
+</span></span><span style=display:flex><span>        poolDictionary[key].Enqueue(obj);  <span style=color:#75715e>// 放回池中</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    IEnumerator ReturnAfterDelay(GameObject obj, <span style=color:#66d9ef>float</span> delay)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> WaitForSeconds(delay);
+</span></span><span style=display:flex><span>        ReturnImmediate(obj);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 使用示例 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MonsterSpawner</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> GameObject monsterPrefab;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> Transform[] spawnPoints;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Start()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        InvokeRepeating(nameof(SpawnMonster), <span style=color:#ae81ff>1f</span>, <span style=color:#ae81ff>5f</span>); <span style=color:#75715e>// 1秒后开始，每5秒生成一只</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> SpawnMonster()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Transform spawnPoint = spawnPoints[Random.Range(<span style=color:#ae81ff>0</span>, spawnPoints.Length)];
+</span></span><span style=display:flex><span>        GameObject monster = ObjectPool.Instance.Get(
+</span></span><span style=display:flex><span>            monsterPrefab,
+</span></span><span style=display:flex><span>            spawnPoint.position,
+</span></span><span style=display:flex><span>            Quaternion.identity
+</span></span><span style=display:flex><span>        );
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 怪物死亡时（归还给对象池而不是Destroy）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Monster</span> : MonoBehaviour, IDamageable
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Die()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 播放死亡效果...</span>
+</span></span><span style=display:flex><span>        ObjectPool.Instance.Return(gameObject, <span style=color:#ae81ff>2f</span>); <span style=color:#75715e>// 2秒后归还到池</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=44-scriptableobject-数据配置->4.4 ScriptableObject 数据配置 ⭐⭐⭐</h2><blockquote><p><strong>用途</strong>：道具数据、怪物数据、技能数据——不用把数据写死在代码里！</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 定义道具数据 =====</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[CreateAssetMenu(fileName = &#34;NewItem&#34;, menuName = &#34;GameData/Item&#34;)]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ItemData</span> : ScriptableObject
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span>    itemId;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> itemName;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> description;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Sprite icon;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span>    price;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> ItemType itemType;  <span style=color:#75715e>// 枚举类型</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>    [Header(&#34;装备属性（装备类型才填）&#34;)]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> attackBonus;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> defenseBonus;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> hpBonus;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>enum</span> ItemType
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Weapon,      <span style=color:#75715e>// 武器</span>
+</span></span><span style=display:flex><span>    Armor,       <span style=color:#75715e>// 防具</span>
+</span></span><span style=display:flex><span>    Consumable,  <span style=color:#75715e>// 消耗品（药水等）</span>
+</span></span><span style=display:flex><span>    Quest,       <span style=color:#75715e>// 任务物品</span>
+</span></span><span style=display:flex><span>    Material     <span style=color:#75715e>// 材料</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 使用方式（在Inspector中拖入）=====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ItemManager</span> : MonoSingleton&lt;ItemManager&gt;
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> ItemData[] allItems;  <span style=color:#75715e>// 在Inspector拖入所有道具数据</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Dictionary&lt;<span style=color:#66d9ef>int</span>, ItemData&gt; itemDatabase = <span style=color:#66d9ef>new</span> Dictionary&lt;<span style=color:#66d9ef>int</span>, ItemData&gt;();
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>void</span> Awake()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>base</span>.Awake();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 构建快速查找字典</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>foreach</span> (ItemData item <span style=color:#66d9ef>in</span> allItems)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            itemDatabase[item.itemId] = item;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> ItemData GetItemById(<span style=color:#66d9ef>int</span> id)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (itemDatabase.TryGetValue(id, <span style=color:#66d9ef>out</span> ItemData data))
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> data;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        Debug.LogWarning(<span style=color:#e6db74>$&#34;找不到ID为{id}的道具！&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=45-观察者模式用于任务系统等>4.5 观察者模式（用于任务系统等）⭐⭐</h2><blockquote><p><strong>用途</strong>：任务系统监听游戏事件（杀怪、拾取、对话触发任务完成）</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ===== 简单事件总线 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EventCenter</span> : MonoSingleton&lt;EventCenter&gt;
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Dictionary&lt;<span style=color:#66d9ef>string</span>, Action&lt;<span style=color:#66d9ef>object</span>&gt;&gt; eventDictionary
+</span></span><span style=display:flex><span>        = <span style=color:#66d9ef>new</span> Dictionary&lt;<span style=color:#66d9ef>string</span>, Action&lt;<span style=color:#66d9ef>object</span>&gt;&gt;();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 订阅事件</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Subscribe(<span style=color:#66d9ef>string</span> eventName, Action&lt;<span style=color:#66d9ef>object</span>&gt; callback)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (!eventDictionary.ContainsKey(eventName))
+</span></span><span style=display:flex><span>            eventDictionary[eventName] = <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        eventDictionary[eventName] += callback;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 取消订阅</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Unsubscribe(<span style=color:#66d9ef>string</span> eventName, Action&lt;<span style=color:#66d9ef>object</span>&gt; callback)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (eventDictionary.ContainsKey(eventName))
+</span></span><span style=display:flex><span>            eventDictionary[eventName] -= callback;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 触发事件</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Publish(<span style=color:#66d9ef>string</span> eventName, <span style=color:#66d9ef>object</span> data = <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (eventDictionary.ContainsKey(eventName))
+</span></span><span style=display:flex><span>            eventDictionary[eventName]?.Invoke(data);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ===== 使用：怪物死亡触发任务进度 =====</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Monster</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>string</span> monsterType = <span style=color:#e6db74>&#34;哥布林&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Die()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 怪物死亡时发布事件</span>
+</span></span><span style=display:flex><span>        EventCenter.Instance.Publish(<span style=color:#e6db74>&#34;MonsterKilled&#34;</span>, monsterType);
+</span></span><span style=display:flex><span>        ObjectPool.Instance.Return(gameObject, <span style=color:#ae81ff>2f</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 任务系统监听杀怪事件</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>KillQuestTask</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>string</span> targetMonster = <span style=color:#e6db74>&#34;哥布林&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span>    requiredCount = <span style=color:#ae81ff>10</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentCount = <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnEnable()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        EventCenter.Instance.Subscribe(<span style=color:#e6db74>&#34;MonsterKilled&#34;</span>, OnMonsterKilled);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnDisable()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        EventCenter.Instance.Unsubscribe(<span style=color:#e6db74>&#34;MonsterKilled&#34;</span>, OnMonsterKilled);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> OnMonsterKilled(<span style=color:#66d9ef>object</span> data)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>string</span> killedType = data <span style=color:#66d9ef>as</span> <span style=color:#66d9ef>string</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (killedType == targetMonster)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            currentCount++;
+</span></span><span style=display:flex><span>            Debug.Log(<span style=color:#e6db74>$&#34;击杀进度：{currentCount}/{requiredCount}&#34;</span>);
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (currentCount &gt;= requiredCount)
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                Debug.Log(<span style=color:#e6db74>&#34;任务完成！&#34;</span>);
+</span></span><span style=display:flex><span>                EventCenter.Instance.Publish(<span style=color:#e6db74>&#34;QuestCompleted&#34;</span>, <span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h1 id=第五章项目常用数据结构速查>第五章：项目常用数据结构速查</h1><h2 id=51-listt列表>5.1 List&lt;T>（列表）</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// 声明</span>
+</span></span><span style=display:flex><span>List&lt;<span style=color:#66d9ef>string</span>&gt; inventory = <span style=color:#66d9ef>new</span> List&lt;<span style=color:#66d9ef>string</span>&gt;();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 增</span>
+</span></span><span style=display:flex><span>inventory.Add(<span style=color:#e6db74>&#34;铁剑&#34;</span>);                        <span style=color:#75715e>// 添加到末尾</span>
+</span></span><span style=display:flex><span>inventory.Insert(<span style=color:#ae81ff>0</span>, <span style=color:#e6db74>&#34;木盾&#34;</span>);                  <span style=color:#75715e>// 插入到指定位置</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 删</span>
+</span></span><span style=display:flex><span>inventory.Remove(<span style=color:#e6db74>&#34;铁剑&#34;</span>);                     <span style=color:#75715e>// 删除指定元素</span>
+</span></span><span style=display:flex><span>inventory.RemoveAt(<span style=color:#ae81ff>0</span>);                        <span style=color:#75715e>// 删除指定索引的元素</span>
+</span></span><span style=display:flex><span>inventory.Clear();                            <span style=color:#75715e>// 清空</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 查</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> hasItem  = inventory.Contains(<span style=color:#e6db74>&#34;铁剑&#34;</span>);   <span style=color:#75715e>// 是否包含</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>  index    = inventory.IndexOf(<span style=color:#e6db74>&#34;铁剑&#34;</span>);    <span style=color:#75715e>// 查找索引（没有返回-1）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>  count    = inventory.Count;              <span style=color:#75715e>// 数量</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 遍历</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>string</span> item <span style=color:#66d9ef>in</span> inventory)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(item);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 排序（需要元素实现IComparable，或传入比较器）</span>
+</span></span><span style=display:flex><span>inventory.Sort();
+</span></span></code></pre></div><hr><h2 id=52-dictionarytkey-tvalue字典>5.2 Dictionary&lt;TKey, TValue>（字典）</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// 背包：itemId → 数量</span>
+</span></span><span style=display:flex><span>Dictionary&lt;<span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span>&gt; bag = <span style=color:#66d9ef>new</span> Dictionary&lt;<span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span>&gt;();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 增/改（同一个Key赋值两次=覆盖）</span>
+</span></span><span style=display:flex><span>bag[<span style=color:#ae81ff>1001</span>] = <span style=color:#ae81ff>5</span>;     <span style=color:#75715e>// 铁剑 5把</span>
+</span></span><span style=display:flex><span>bag[<span style=color:#ae81ff>2001</span>] = <span style=color:#ae81ff>10</span>;    <span style=color:#75715e>// 红药水 10个</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 安全读取（用TryGetValue，避免KeyNotFoundException）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (bag.TryGetValue(<span style=color:#ae81ff>1001</span>, <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> count))
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(<span style=color:#e6db74>$&#34;铁剑数量：{count}&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(<span style=color:#e6db74>&#34;没有这个物品&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 删</span>
+</span></span><span style=display:flex><span>bag.Remove(<span style=color:#ae81ff>1001</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 检查</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> hasItem = bag.ContainsKey(<span style=color:#ae81ff>1001</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> hasValue = bag.ContainsValue(<span style=color:#ae81ff>5</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 遍历</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (KeyValuePair&lt;<span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>int</span>&gt; kvp <span style=color:#66d9ef>in</span> bag)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Debug.Log(<span style=color:#e6db74>$&#34;物品ID:{kvp.Key}，数量:{kvp.Value}&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 只遍历Key或Value</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>int</span> id <span style=color:#66d9ef>in</span> bag.Keys)   { }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>int</span> qty <span style=color:#66d9ef>in</span> bag.Values){ }
+</span></span></code></pre></div><hr><h2 id=53-queuet队列和-stackt栈>5.3 Queue&lt;T>（队列）和 Stack&lt;T>（栈）</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// Queue：先进先出（FIFO）→ 对象池、消息队列</span>
+</span></span><span style=display:flex><span>Queue&lt;GameObject&gt; bulletPool = <span style=color:#66d9ef>new</span> Queue&lt;GameObject&gt;();
+</span></span><span style=display:flex><span>bulletPool.Enqueue(newBullet);    <span style=color:#75715e>// 入队</span>
+</span></span><span style=display:flex><span>GameObject bullet = bulletPool.Dequeue();  <span style=color:#75715e>// 出队（取出最早进入的）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> count = bulletPool.Count;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Stack：后进先出（LIFO）→ 撤销系统、UI页面栈</span>
+</span></span><span style=display:flex><span>Stack&lt;<span style=color:#66d9ef>string</span>&gt; pageHistory = <span style=color:#66d9ef>new</span> Stack&lt;<span style=color:#66d9ef>string</span>&gt;();
+</span></span><span style=display:flex><span>pageHistory.Push(<span style=color:#e6db74>&#34;MainMenu&#34;</span>);    <span style=color:#75715e>// 入栈</span>
+</span></span><span style=display:flex><span>pageHistory.Push(<span style=color:#e6db74>&#34;Bag&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span> current = pageHistory.Pop();  <span style=color:#75715e>// 出栈 → &#34;Bag&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span> top = pageHistory.Peek();     <span style=color:#75715e>// 查看栈顶但不出栈 → &#34;MainMenu&#34;</span>
+</span></span></code></pre></div><hr><h1 id=第六章常见错误与调试技巧>第六章：常见错误与调试技巧</h1><h2 id=61-最常见的报错>6.1 最常见的报错</h2><pre tabindex=0><code>NullReferenceException: Object reference not set to an instance of an object
+</code></pre><p><strong>原因</strong>：访问了一个为null的对象</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ❌ 错误</span>
+</span></span><span style=display:flex><span>GameObject player;
+</span></span><span style=display:flex><span>player.SetActive(<span style=color:#66d9ef>false</span>);   <span style=color:#75715e>// player是null！</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ✅ 正确：先检查</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (player != <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>    player.SetActive(<span style=color:#66d9ef>false</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ✅ 更优雅：空值条件运算符</span>
+</span></span><span style=display:flex><span>player?.SetActive(<span style=color:#66d9ef>false</span>);  <span style=color:#75715e>// player为null时不执行，不报错</span>
+</span></span></code></pre></div><hr><pre tabindex=0><code>MissingReferenceException: The object has been destroyed but you are still trying to access it.
+</code></pre><p><strong>原因</strong>：对象已被Destroy，但还持有引用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// ✅ 检查方式</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (enemy != <span style=color:#66d9ef>null</span>)  <span style=color:#75715e>// Unity重写了==运算符，Destroy后判null会返回true</span>
+</span></span><span style=display:flex><span>    enemy.TakeDamage(<span style=color:#ae81ff>10</span>);
+</span></span></code></pre></div><hr><h2 id=62-字符串拼接的几种方式>6.2 字符串拼接的几种方式</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#66d9ef>string</span> name  = <span style=color:#e6db74>&#34;张三&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>    level = <span style=color:#ae81ff>10</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 方式1：+ 拼接（少量时用）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span> s1 = <span style=color:#e6db74>&#34;玩家&#34;</span> + name + <span style=color:#e6db74>&#34;等级&#34;</span> + level;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 方式2：字符串插值（推荐，最清晰）⭐</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span> s2 = <span style=color:#e6db74>$&#34;玩家{name}等级{level}&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 方式3：string.Format（老写法，少用）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span> s3 = <span style=color:#66d9ef>string</span>.Format(<span style=color:#e6db74>&#34;玩家{0}等级{1}&#34;</span>, name, level);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 方式4：StringBuilder（大量拼接时用，性能好）</span>
+</span></span><span style=display:flex><span>StringBuilder sb = <span style=color:#66d9ef>new</span> StringBuilder();
+</span></span><span style=display:flex><span>sb.Append(<span style=color:#e6db74>&#34;玩家&#34;</span>);
+</span></span><span style=display:flex><span>sb.Append(name);
+</span></span><span style=display:flex><span>sb.AppendLine(<span style=color:#e6db74>$&#34;等级{level}&#34;</span>);  <span style=color:#75715e>// 追加并换行</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>string</span> result = sb.ToString();
+</span></span></code></pre></div><hr><h2 id=63-调试技巧>6.3 调试技巧</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// 1. 打印变量值</span>
+</span></span><span style=display:flex><span>Debug.Log(<span style=color:#e6db74>$&#34;当前HP：{hp}，位置：{transform.position}&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 2. 在Scene视图画线（可视化调试）</span>
+</span></span><span style=display:flex><span>Debug.DrawLine(start, end, Color.red, <span style=color:#ae81ff>2f</span>);   <span style=color:#75715e>// 画线，显示2秒</span>
+</span></span><span style=display:flex><span>Debug.DrawRay(origin, direction, Color.green); <span style=color:#75715e>// 画射线</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 3. 条件断言（不满足时报错）</span>
+</span></span><span style=display:flex><span>Debug.Assert(hp &gt; <span style=color:#ae81ff>0</span>, <span style=color:#e6db74>&#34;HP不应该为0！&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 4. 给Log加标签（方便过滤）</span>
+</span></span><span style=display:flex><span>Debug.Log(<span style=color:#e6db74>&#34;[背包系统] 添加道具：&#34;</span> + itemName);
+</span></span><span style=display:flex><span>Debug.Log(<span style=color:#e6db74>&#34;[战斗系统] 造成伤害：&#34;</span> + damage);
+</span></span></code></pre></div><hr><h2 id=64-常用的-mathf-工具方法>6.4 常用的 Mathf 工具方法</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// 钳制（让值保持在范围内）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>  clampedHP  = Mathf.Clamp(hp, <span style=color:#ae81ff>0</span>, maxHP);        <span style=color:#75715e>// 限制在 0~maxHP</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>float</span> clampedV  = Mathf.Clamp01(<span style=color:#66d9ef>value</span>);              <span style=color:#75715e>// 限制在 0~1（进度条常用）</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 最大/最小值</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>  damage     = Mathf.Max(<span style=color:#ae81ff>0</span>, rawDamage - armor);   <span style=color:#75715e>// 伤害不为负</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>float</span> minDist   = Mathf.Min(dist1, dist2);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 绝对值、平方根</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>float</span> absValue  = Mathf.Abs(-<span style=color:#ae81ff>5f</span>);    <span style=color:#75715e>// 5</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>float</span> sqrtValue = Mathf.Sqrt(<span style=color:#ae81ff>16f</span>);   <span style=color:#75715e>// 4</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 插值（常用于平滑移动/渐变）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>float</span> current = Mathf.Lerp(<span style=color:#ae81ff>0f</span>, <span style=color:#ae81ff>100f</span>, <span style=color:#ae81ff>0.5f</span>);  <span style=color:#75715e>// 50（在0和100之间取50%的位置）</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// UI血条平滑变化：</span>
+</span></span><span style=display:flex><span>hpSlider.<span style=color:#66d9ef>value</span> = Mathf.Lerp(hpSlider.<span style=color:#66d9ef>value</span>, targetValue, Time.deltaTime * <span style=color:#ae81ff>5f</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 随机数</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>   randInt   = Random.Range(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>10</span>);    <span style=color:#75715e>// [0, 10) 整数，不含10</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>float</span> randFloat = Random.Range(<span style=color:#ae81ff>0f</span>, <span style=color:#ae81ff>1f</span>);   <span style=color:#75715e>// [0, 1] 小数，含1</span>
+</span></span></code></pre></div><hr><h1 id=-快速参考卡片>📌 快速参考卡片</h1><h2 id=c关键字速查>C#关键字速查</h2><div class=table-wrapper><table><thead><tr><th>关键字</th><th>用途</th><th>示例</th></tr></thead><tbody><tr><td><code>var</code></td><td>自动推断类型</td><td><code>var list = new List&lt;int>();</code></td></tr><tr><td><code>null</code></td><td>空引用</td><td><code>if (obj == null)</code></td></tr><tr><td><code>this</code></td><td>当前对象自身</td><td><code>this.name = name;</code></td></tr><tr><td><code>base</code></td><td>父类</td><td><code>base.Awake();</code></td></tr><tr><td><code>static</code></td><td>静态（不需要实例）</td><td><code>static int count;</code></td></tr><tr><td><code>readonly</code></td><td>只读（赋值后不可改）</td><td><code>readonly int MAX = 100;</code></td></tr><tr><td><code>const</code></td><td>常量（编译时确定）</td><td><code>const float PI = 3.14f;</code></td></tr><tr><td><code>new</code></td><td>创建对象</td><td><code>new List&lt;int>()</code></td></tr><tr><td><code>as</code></td><td>安全类型转换</td><td><code>var e = obj as Enemy;</code></td></tr><tr><td><code>is</code></td><td>类型判断</td><td><code>if (obj is Enemy enemy)</code></td></tr><tr><td><code>override</code></td><td>重写父类方法</td><td><code>override void Update()</code></td></tr><tr><td><code>virtual</code></td><td>可被重写的方法</td><td><code>virtual void Attack()</code></td></tr><tr><td><code>abstract</code></td><td>抽象（子类必须实现）</td><td><code>abstract void Die();</code></td></tr><tr><td><code>sealed</code></td><td>不可被继承</td><td><code>sealed class Item</code></td></tr></tbody></table></div><hr><h2 id=unity-特性标签速查>Unity 特性标签速查</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#a6e22e>[SerializeField]</span>              <span style=color:#75715e>// private变量在Inspector显示</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[HideInInspector]</span>             <span style=color:#75715e>// public变量在Inspector隐藏</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[Header(&#34;战斗属性&#34;)]</span>          <span style=color:#75715e>// 在Inspector显示分组标题</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[Tooltip(&#34;玩家的最大血量&#34;)]</span>   <span style=color:#75715e>// 鼠标悬停时显示提示</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[Range(0, 100)]</span>               <span style=color:#75715e>// Inspector显示滑动条</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[RequireComponent(typeof(Rigidbody))]</span> <span style=color:#75715e>// 强制要求同时有Rigidbody组件</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[DisallowMultipleComponent]</span>   <span style=color:#75715e>// 同一对象只能挂一个此组件</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[CreateAssetMenu(fileName = &#34;x&#34;, menuName = &#34;y&#34;)]</span> <span style=color:#75715e>// 创建ScriptableObject菜单</span>
+</span></span></code></pre></div><hr><p><em>📖 本手册持续更新中，遇到新知识点随时补充！</em>
+<em>🎮 加油！一起把MMORPG项目拿下！</em></p></section><footer class="article-meta article-footer"><section class=article-tags><a href=/tags/mmorpg/>MMORPG</a>
+<a href=/tags/%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE/>游戏项目</a>
+<a href=/tags/%E7%AC%94%E8%AE%B0/>笔记</a></section></footer></article><aside><h2 class=section-title>Related content</h2><div class=subsection-list><div class=article-list--tile><article class=has-image><a href=/posts/mmorpg-devlog-01/><div class=article-image><img alt="Featured image of post MMORPG开发日志01：背包系统的设计与实现" height=150 loading=lazy src=/photo-1614853316476-de00d14cb1fc_15164071187798526002_hu_34cac7e96580a60c.jpg srcset="/photo-1614853316476-de00d14cb1fc_15164071187798526002_hu_34cac7e96580a60c.jpg 1x, /photo-1614853316476-de00d14cb1fc_15164071187798526002_hu_c7312181e0b1a22e.jpg 2x" width=250></div><div class=article-details style="background:linear-gradient(0deg,#3847b880 0%,#022048C0 100%)"><h2 class=article-title>MMORPG开发日志01：背包系统的设计与实现</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2026 牧屋 MUWU</section><section class=powerby>牧屋 MUWU<br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><script type=module>
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script></main></div><script type=text/javascript src=/ts/main.acaf849f2b273f6a8368a58b001f336738d0c948d92e79b116467d0c7515f932.js defer></script></body></html>
