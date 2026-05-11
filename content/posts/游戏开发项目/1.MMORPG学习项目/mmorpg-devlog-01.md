@@ -1,14 +1,15 @@
 ---
-title: "MMORPG开发日志01：背包系统的设计与实现"
-description: "记录背包系统从零到完成的全过程"
-date: 2026-03-24T14:00:00+08:00
+title: "笔记02_登陆系统"
+description: "01MMORPG学习"
+date: 2026-05-11T10:00:00+08:00
 image: https://images.unsplash.com/photo-1614853316476-de00d14cb1fc?w=1200
 tags:
+  - MMORPG
+  - 笔记
   - Unity
   - C#
-  - MMORPG
 categories:
-  - 开发日志
+  - 技术笔记
 draft: false
 ---
 
