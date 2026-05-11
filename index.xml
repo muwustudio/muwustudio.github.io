@@ -1,4 +1,872 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>牧屋 MUWU</title><link>https://muwustudio.github.io/</link><description>Recent content on 牧屋 MUWU</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 02 Apr 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://muwustudio.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>03MMORPG项目-C#复习手册</title><link>https://muwustudio.github.io/posts/03%E5%A4%8D%E4%B9%A0/</link><pubDate>Thu, 02 Apr 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/03%E5%A4%8D%E4%B9%A0/</guid><description>&lt;h1 id="-mmorpg项目--c-复习手册"&gt;🎮 MMORPG项目 · C# 复习手册
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>牧屋 MUWU</title><link>https://muwustudio.github.io/</link><description>Recent content on 牧屋 MUWU</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 11 May 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://muwustudio.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记01_进度条假加载</title><link>https://muwustudio.github.io/posts/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE/1.mmorpg%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/%E7%AC%94%E8%AE%B001_-%E8%BF%9B%E5%BA%A6%E6%9D%A1%E5%81%87%E5%8A%A0%E8%BD%BD/</link><pubDate>Mon, 11 May 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE/1.mmorpg%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/%E7%AC%94%E8%AE%B001_-%E8%BF%9B%E5%BA%A6%E6%9D%A1%E5%81%87%E5%8A%A0%E8%BD%BD/</guid><description>&lt;h1 id="01mmorpg学习"&gt;01MMORPG学习
+&lt;/h1&gt;&lt;h1 id="笔记01_进度条假加载"&gt;笔记01_进度条假加载
+&lt;/h1&gt;&lt;h3 id="header-和-tooltip"&gt;[Header] 和 [Tooltip]
+&lt;/h3&gt;&lt;p&gt;这两个是 &lt;strong&gt;Inspector 可视化特性&lt;/strong&gt;，写在变量上方，不影响任何逻辑。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;[Header(&amp;#34;UI 组件&amp;#34;)]&lt;/span&gt; &lt;span style="color:#75715e"&gt;// 在Inspector中显示分类标题&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;[Tooltip(&amp;#34;这是进度条&amp;#34;)]&lt;/span&gt; &lt;span style="color:#75715e"&gt;// 鼠标悬停时显示说明文字&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; Slider progressSlider;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;🗣️ &lt;strong&gt;口诀&lt;/strong&gt;：Header 是分组标题，Tooltip 是鼠标提示，纯粹美化 Inspector 用。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;h3 id="1--协程-ienumerator"&gt;1. ⚙️ 协程 IEnumerator
+&lt;/h3&gt;&lt;h4 id="-简洁解释"&gt;📖 简洁解释
+&lt;/h4&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;普通函数：&lt;strong&gt;一帧内从头跑到尾&lt;/strong&gt;，中途无法暂停。
+协程：&lt;strong&gt;可以在中途暂停，等条件满足后再继续&lt;/strong&gt;，不会卡住画面。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h4 id="-最简代码示例"&gt;💻 最简代码示例
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ==============================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 普通函数 —— 进度条根本看不到变化，画面直接卡到100%&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ==============================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; BadExample()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i = &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; i &amp;lt;= &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;; i++)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; progressSlider.&lt;span style="color:#66d9ef"&gt;value&lt;/span&gt; = i; &lt;span style="color:#75715e"&gt;// 画面来不及刷新，玩家看不到过程&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ==============================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 协程 —— 每帧更新一次，画面正常刷新&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ==============================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;IEnumerator GoodExample()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i = &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; i &amp;lt;= &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;; i++)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; progressSlider.&lt;span style="color:#66d9ef"&gt;value&lt;/span&gt; = i;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;yield&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;null&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// ← 暂停，等下一帧再继续&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ==============================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 协程的启动方式（必须用StartCoroutine！）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ==============================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; Start()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; StartCoroutine(GoodExample()); &lt;span style="color:#75715e"&gt;// ← 不能直接调用，必须这样启动&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;常用 yield 暂停方式：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;yield&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;null&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// 等待下一帧&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;yield&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; WaitForSeconds(&lt;span style="color:#ae81ff"&gt;2f&lt;/span&gt;); &lt;span style="color:#75715e"&gt;// 等待2秒&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;🗣️ &lt;strong&gt;口诀&lt;/strong&gt;：需要&amp;quot;等待&amp;quot;或&amp;quot;逐帧更新&amp;quot;，就用协程，用 &lt;code&gt;yield return&lt;/code&gt; 控制暂停。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h4 id="-常见使用场景"&gt;📌 常见使用场景
+&lt;/h4&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;场景&lt;/th&gt;
+ &lt;th&gt;例子&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;逐帧更新画面&lt;/td&gt;
+ &lt;td&gt;进度条、血条动画、技能CD&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;等待一段时间&lt;/td&gt;
+ &lt;td&gt;3秒后关闭提示框、延迟跳转场景&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;等待某件事完成&lt;/td&gt;
+ &lt;td&gt;等待异步加载场景完毕&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;技能/动画序列&lt;/td&gt;
+ &lt;td&gt;先播放动画，再造成伤害&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id="2--mathfroundtoint"&gt;2. 🔢 Mathf.RoundToInt()
+&lt;/h3&gt;&lt;h4 id="-简洁解释-1"&gt;📖 简洁解释
+&lt;/h4&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;code&gt;Mathf&lt;/code&gt; 是 Unity 内置数学工具箱。
+&lt;code&gt;RoundToInt&lt;/code&gt; = &lt;strong&gt;Round（四舍五入）+ ToInt（转成整数）&lt;/strong&gt;。
+因为 Slider 的 value 是 float（小数），直接显示会出现 &lt;code&gt;99.9998%&lt;/code&gt; 这种情况，用它转成整数显示更干净。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h4 id="-最简代码示例-1"&gt;💻 最简代码示例
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;float&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;value&lt;/span&gt; = &lt;span style="color:#ae81ff"&gt;99.6f&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ✗ 不处理直接显示&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;progressText.text = &lt;span style="color:#66d9ef"&gt;value&lt;/span&gt; + &lt;span style="color:#e6db74"&gt;&amp;#34;%&amp;#34;&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// 显示：99.6%（甚至 99.999847%）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ✓ 四舍五入转整数后显示&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; result = Mathf.RoundToInt(&lt;span style="color:#66d9ef"&gt;value&lt;/span&gt;); &lt;span style="color:#75715e"&gt;// result = 100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;progressText.text = result + &lt;span style="color:#e6db74"&gt;&amp;#34;%&amp;#34;&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// 显示：100%&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;🗣️ &lt;strong&gt;口诀&lt;/strong&gt;：Mathf 是数学工具箱，float 转 int 显示用 RoundToInt，四舍五入更美观。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h4 id="-常见使用场景-1"&gt;📌 常见使用场景
+&lt;/h4&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;场景&lt;/th&gt;
+ &lt;th&gt;例子&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;进度条百分比显示&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;99.9f → 100%&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;伤害数字显示&lt;/td&gt;
+ &lt;td&gt;避免显示小数伤害值&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;经验值/金币计算&lt;/td&gt;
+ &lt;td&gt;百分比经验条&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id="3--scenemanagerloadscene"&gt;3. 🚪 SceneManager.LoadScene()
+&lt;/h3&gt;&lt;h4 id="-简洁解释-2"&gt;📖 简洁解释
+&lt;/h4&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;Unity 把&amp;quot;跳转场景&amp;quot;的功能封装在 &lt;code&gt;SceneManager&lt;/code&gt;（场景管理器）里，
+&lt;code&gt;LoadScene&lt;/code&gt; = Load（加载）+ Scene（场景），见名知意。
+使用前需要在代码顶部引入命名空间。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h4 id="-最简代码示例-2"&gt;💻 最简代码示例
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 第一步：顶部引入命名空间（必须加！否则报错）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;using&lt;/span&gt; UnityEngine.SceneManagement;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 第二步：调用跳转&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SceneManager.LoadScene(&lt;span style="color:#e6db74"&gt;&amp;#34;MainGame&amp;#34;&lt;/span&gt;); &lt;span style="color:#75715e"&gt;// 括号内填写目标场景的名字（字符串）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ⚠️ 注意：场景必须先在 Build Settings 中添加才能跳转&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 菜单：File → Build Settings → 把场景拖进去&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="-以后遇到类似不会的api怎么找"&gt;🔍 以后遇到类似不会的API，怎么找？
+&lt;/h4&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;第一步：用中文描述需求
+ └─ &amp;#34;Unity 怎么切换场景&amp;#34;
+
+第二步：问 AI 或查 Unity 官方文档
+ └─ docs.unity3d.com（搜索框直接搜 SceneManager）
+
+第三步：看 API 名字，Unity 命名非常语义化，见名知意
+ └─ SceneManager.LoadScene
+ ↑场景管理器 ↑加载场景 ← 光看名字就能猜到意思
+
+第四步：确认需要 using 哪个命名空间
+ └─ 文档里会写，或者直接问 AI
+&lt;/code&gt;&lt;/pre&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;🗣️ &lt;strong&gt;口诀&lt;/strong&gt;：跳转场景找 SceneManager，用之前加 using，场景名要在 Build Settings 里注册。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h4 id="-常见使用场景-2"&gt;📌 常见使用场景
+&lt;/h4&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;场景&lt;/th&gt;
+ &lt;th&gt;例子&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;加载完毕后跳转&lt;/td&gt;
+ &lt;td&gt;假加载结束 → 进入主城&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;点击按钮切换场景&lt;/td&gt;
+ &lt;td&gt;主菜单 → 开始游戏&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;角色死亡后重载&lt;/td&gt;
+ &lt;td&gt;重新加载当前场景&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="-总览速查表"&gt;🗂️ 总览速查表
+&lt;/h2&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;知识点&lt;/th&gt;
+ &lt;th&gt;一句话口诀&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;[Header]&lt;/code&gt; / &lt;code&gt;[Tooltip]&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;纯粹美化 Inspector，不影响逻辑&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;协程 &lt;code&gt;IEnumerator&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;需要等待或逐帧更新，就用协程，&lt;code&gt;yield return&lt;/code&gt; 控制暂停&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;Mathf.RoundToInt()&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;float 转 int 显示用 RoundToInt，四舍五入更美观&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;SceneManager.LoadScene()&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;跳转场景找 SceneManager，用之前加 using&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;</description></item><item><title>笔记02_登陆系统</title><link>https://muwustudio.github.io/posts/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE/1.mmorpg%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/mmorpg-devlog-01/</link><pubDate>Mon, 11 May 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE/1.mmorpg%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/mmorpg-devlog-01/</guid><description>&lt;img src="https://muwustudio.github.io/" alt="Featured image of post 笔记02_登陆系统" /&gt;&lt;h2 id="今天做了什么"&gt;今天做了什么？
+&lt;/h2&gt;&lt;p&gt;完成了MMORPG项目的背包系统，支持物品添加、删除、堆叠和排序。&lt;/p&gt;
+&lt;h2 id="技术设计"&gt;技术设计
+&lt;/h2&gt;&lt;p&gt;使用List存储物品列表，ScriptableObject定义物品模板。&lt;/p&gt;
+&lt;h2 id="遇到的问题"&gt;遇到的问题
+&lt;/h2&gt;&lt;h3 id="问题1物品堆叠溢出"&gt;问题1：物品堆叠溢出
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;现象：&lt;/strong&gt; 背包满时继续拾取可堆叠物品，数量会超过上限。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt; 在AddItem方法中添加堆叠上限检查。&lt;/p&gt;
+&lt;h3 id="问题2ui刷新不及时"&gt;问题2：UI刷新不及时
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;现象：&lt;/strong&gt; 拖拽物品后UI显示不同步。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt; 使用观察者模式，数据变更时触发UI刷新事件。&lt;/p&gt;
+&lt;h2 id="ai的帮助"&gt;AI的帮助
+&lt;/h2&gt;&lt;p&gt;用Cursor IDE加速了代码编写，用Ollama帮我Review了核心逻辑。&lt;/p&gt;
+&lt;h2 id="下一步计划"&gt;下一步计划
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;实现装备系统&lt;/li&gt;
+&lt;li&gt;添加物品排序功能&lt;/li&gt;
+&lt;li&gt;优化UI拖拽手感&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>笔记02_登陆系统</title><link>https://muwustudio.github.io/posts/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE/1.mmorpg%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/%E7%AC%94%E8%AE%B002_-%E7%99%BB%E5%BD%95%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B002_-%E7%99%BB%E5%BD%95%E7%B3%BB%E7%BB%9F/</link><pubDate>Mon, 11 May 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE/1.mmorpg%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/%E7%AC%94%E8%AE%B002_-%E7%99%BB%E5%BD%95%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B002_-%E7%99%BB%E5%BD%95%E7%B3%BB%E7%BB%9F/</guid><description>&lt;h1 id="01mmorpg学习"&gt;01MMORPG学习
+&lt;/h1&gt;&lt;h1 id="笔记02_登陆系统"&gt;笔记02_登陆系统
+&lt;/h1&gt;&lt;p&gt;&lt;img alt="登录系统" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px"&gt;&lt;/p&gt;
+&lt;h2 id="目录"&gt;目录
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a class="link" href="#1-%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8fsingleton" &gt;单例模式（Singleton）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="#2-unityaction-%e5%9b%9e%e8%b0%83%e5%a7%94%e6%89%98" &gt;UnityAction 回调委托&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="#3-%e5%9b%9e%e8%b0%83%e6%b3%a8%e5%86%8c%e4%b8%8e%e8%a6%86%e7%9b%96%e9%97%ae%e9%a2%98" &gt;回调注册与覆盖问题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="#4-ui-%e9%9d%a2%e6%9d%bf%e4%ba%92%e5%88%87setactive" &gt;UI 面板互切（SetActive）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="#5-%e8%be%93%e5%85%a5%e6%a0%a1%e9%aa%8cstringisnullorempty" &gt;输入校验（string.IsNullOrEmpty）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="#6-%e6%b6%88%e6%81%af%e5%bc%b9%e7%aa%97messagebox" &gt;消息弹窗（MessageBox）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="#7-%e5%be%85%e5%8f%91%e6%b6%88%e6%81%af%e9%98%9f%e5%88%97pendingmessage-%e6%a8%a1%e5%bc%8f" &gt;待发消息队列（pendingMessage 模式）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="#8-%e6%b6%88%e6%81%af%e8%ae%a2%e9%98%85%e4%b8%8e%e5%88%86%e5%8f%91messagedistributer" &gt;消息订阅与分发（MessageDistributer）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="#9-%e7%bd%91%e7%bb%9c%e8%bf%9e%e6%8e%a5%e4%b8%8e%e6%96%ad%e5%bc%80%e5%a4%84%e7%90%86" &gt;网络连接与断开处理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="#10-%e5%9c%ba%e6%99%af%e5%88%87%e6%8d%a2scenemanager" &gt;场景切换（SceneManager）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="#11-%e6%95%b4%e4%bd%93%e8%b0%83%e7%94%a8%e6%b5%81%e7%a8%8b%e5%9b%be" &gt;整体调用流程图&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="1-单例模式singleton"&gt;1. 单例模式（Singleton）
+&lt;/h2&gt;&lt;h3 id="是什么"&gt;是什么
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;单例&lt;/strong&gt;保证一个类在整个游戏生命周期中&lt;strong&gt;只有一个实例&lt;/strong&gt;，并提供一个全局访问点 &lt;code&gt;Instance&lt;/code&gt;。&lt;code&gt;UserService&lt;/code&gt; 继承了 &lt;code&gt;Singleton&amp;lt;UserService&amp;gt;&lt;/code&gt;，所以任何地方写 &lt;code&gt;UserService.Instance&lt;/code&gt; 拿到的都是同一个对象。&lt;/p&gt;
+&lt;h3 id="最简代码示例"&gt;最简代码示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 一个极简的泛型单例基类&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Singleton&lt;/span&gt;&amp;lt;T&amp;gt; &lt;span style="color:#66d9ef"&gt;where&lt;/span&gt; T : &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;static&lt;/span&gt; T _instance;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;static&lt;/span&gt; T Instance
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;get&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (_instance == &lt;span style="color:#66d9ef"&gt;null&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; _instance = &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; T();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; _instance;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 使用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;UserService&lt;/span&gt; : Singleton&amp;lt;UserService&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; SayHi() =&amp;gt; Debug.Log(&lt;span style="color:#e6db74"&gt;&amp;#34;Hello from UserService&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 任何地方调用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;UserService.Instance.SayHi();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="常见使用场景"&gt;常见使用场景
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;场景&lt;/th&gt;
+ &lt;th&gt;示例&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;网络管理&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;NetClient.Instance.Connect()&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;音频管理&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;AudioManager.Instance.PlayBGM()&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;全局数据&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;GameDataManager.Instance.GetPlayerData()&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;UI 管理&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;UIManager.Instance.ShowPanel(&amp;quot;Login&amp;quot;)&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：单例方便但不要滥用，它本质是全局变量，过多会让依赖关系混乱。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="2-unityaction-回调委托"&gt;2. UnityAction 回调委托
+&lt;/h2&gt;&lt;h3 id="是什么-1"&gt;是什么
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;UnityAction&amp;lt;T1, T2&amp;gt;&lt;/code&gt; 是 Unity 封装的委托类型（本质就是 C# 的 &lt;code&gt;Action&amp;lt;T1, T2&amp;gt;&lt;/code&gt;）。它的作用是：&lt;strong&gt;&amp;ldquo;我先告诉你将来要执行什么函数，等条件满足时你来调我&amp;rdquo;&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在本项目中，&lt;code&gt;UserService&lt;/code&gt; 定义了两个回调：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; UnityAction&amp;lt;Result, &lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;&amp;gt; OnLogin;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; UnityAction&amp;lt;Result, &lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;&amp;gt; OnRegister;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;意思是：当登录/注册结果回来时，调用这个委托，把 &lt;code&gt;Result&lt;/code&gt;（成功/失败）和 &lt;code&gt;string&lt;/code&gt;（错误信息）传给 UI。&lt;/p&gt;
+&lt;h3 id="最简代码示例-1"&gt;最简代码示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;using&lt;/span&gt; UnityEngine.Events;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;NotificationCenter&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 定义一个回调：参数是 bool（是否成功）和 string（消息）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; UnityAction&amp;lt;&lt;span style="color:#66d9ef"&gt;bool&lt;/span&gt;, &lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;&amp;gt; OnTaskComplete;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; FinishTask()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 任务完成时，调用回调通知外部&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; OnTaskComplete?.Invoke(&lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;任务完成！&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;UIPanel&lt;/span&gt; : MonoBehaviour
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; Start()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; center = &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; NotificationCenter();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 把自己的方法&amp;#34;挂&amp;#34;上去&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; center.OnTaskComplete = HandleResult;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; HandleResult(&lt;span style="color:#66d9ef"&gt;bool&lt;/span&gt; success, &lt;span style="color:#66d9ef"&gt;string&lt;/span&gt; msg)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Debug.Log(success ? msg : &lt;span style="color:#e6db74"&gt;&amp;#34;失败：&amp;#34;&lt;/span&gt; + msg);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="常见使用场景-1"&gt;常见使用场景
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;网络请求完成后通知 UI 刷新&lt;/li&gt;
+&lt;li&gt;动画播放结束后触发下一步逻辑&lt;/li&gt;
+&lt;li&gt;按钮点击后执行回调&lt;/li&gt;
+&lt;li&gt;计时器到时间后执行函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="3-回调注册与覆盖问题"&gt;3. 回调注册与覆盖问题
+&lt;/h2&gt;&lt;h3 id="是什么-2"&gt;是什么
+&lt;/h3&gt;&lt;p&gt;本项目中 &lt;code&gt;UILogin.Start&lt;/code&gt; 和 &lt;code&gt;UIRegister.Start&lt;/code&gt; 分别这样写：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// UILogin.cs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; Start() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; UserService.Instance.OnLogin = OnLogin; &lt;span style="color:#75715e"&gt;// 直接赋值&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// UIRegister.cs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; Start() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; UserService.Instance.OnRegister = OnRegister; &lt;span style="color:#75715e"&gt;// 直接赋值&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里用的是 &lt;strong&gt;&lt;code&gt;=&lt;/code&gt;（赋值）&lt;/strong&gt; 而不是 &lt;strong&gt;&lt;code&gt;+=&lt;/code&gt;（追加）&lt;/strong&gt;。意味着：如果两个界面同时存在，&lt;strong&gt;后执行 Start 的那个会覆盖前一个的回调&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id="对比赋值-vs-追加"&gt;对比：赋值 vs 追加
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ❌ 赋值 — 会覆盖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;UserService.Instance.OnLogin = MyCallback; &lt;span style="color:#75715e"&gt;// 之前注册的全没了&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ✅ 追加 — 多个订阅者共存&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;UserService.Instance.OnLogin += MyCallback; &lt;span style="color:#75715e"&gt;// 在已有基础上追加&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// ✅ 取消订阅&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;UserService.Instance.OnLogin -= MyCallback; &lt;span style="color:#75715e"&gt;// 只移除自己&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="本项目为什么没出问题"&gt;本项目为什么没出问题
+&lt;/h3&gt;&lt;p&gt;因为设计上同一时刻&lt;strong&gt;只显示一个面板&lt;/strong&gt;：登录界面和注册界面互相切换，不会同时 &lt;code&gt;Start&lt;/code&gt;，所以不会覆盖。&lt;/p&gt;
+&lt;h3 id="常见使用场景-2"&gt;常见使用场景
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;方式&lt;/th&gt;
+ &lt;th&gt;适用场景&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;=&lt;/code&gt; 赋值&lt;/td&gt;
+ &lt;td&gt;确定只有一个订阅者，简单直接&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;+=&lt;/code&gt; 追加&lt;/td&gt;
+ &lt;td&gt;多个模块需要监听同一事件（如成就系统 + UI 同时监听&amp;quot;击杀&amp;quot;事件）&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;C# &lt;code&gt;event&lt;/code&gt; 关键字&lt;/td&gt;
+ &lt;td&gt;需要限制外部只能 &lt;code&gt;+=&lt;/code&gt; / &lt;code&gt;-=&lt;/code&gt;，不能直接 &lt;code&gt;=&lt;/code&gt; 或 &lt;code&gt;Invoke&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="4-ui-面板互切setactive"&gt;4. UI 面板互切（SetActive）
+&lt;/h2&gt;&lt;h3 id="是什么-3"&gt;是什么
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;GameObject.SetActive(bool)&lt;/code&gt; 控制一个游戏物体的&lt;strong&gt;激活/隐藏&lt;/strong&gt;。隐藏时物体上所有组件停止工作（&lt;code&gt;Update&lt;/code&gt; 不跑、渲染不显示）。&lt;/p&gt;
+&lt;p&gt;本项目用它来实现&amp;quot;登录 ↔ 注册&amp;quot;面板切换。&lt;/p&gt;
+&lt;h3 id="最简代码示例-2"&gt;最简代码示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;UIRegister&lt;/span&gt; : MonoBehaviour
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; GameObject uiLogin; &lt;span style="color:#75715e"&gt;// 在 Inspector 拖入登录面板&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; CloseRegister()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 隐藏自己（注册面板）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.gameObject.SetActive(&lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 显示登录面板&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; uiLogin.SetActive(&lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="切换方式对比"&gt;切换方式对比
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;方式&lt;/th&gt;
+ &lt;th&gt;优点&lt;/th&gt;
+ &lt;th&gt;缺点&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;SetActive&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;简单、零开销&lt;/td&gt;
+ &lt;td&gt;隐藏后 &lt;code&gt;Start&lt;/code&gt; 不会再次调用（只有首次激活调一次）&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;切换 &lt;code&gt;CanvasGroup.alpha&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;可做渐变动画&lt;/td&gt;
+ &lt;td&gt;物体仍然存在，可能接收到点击&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;销毁/实例化&lt;/td&gt;
+ &lt;td&gt;完全释放内存&lt;/td&gt;
+ &lt;td&gt;开销大，需重新初始化&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;场景切换&lt;/td&gt;
+ &lt;td&gt;彻底隔离&lt;/td&gt;
+ &lt;td&gt;加载慢，不适合轻量面板切换&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="常见使用场景-3"&gt;常见使用场景
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;登录/注册面板互切&lt;/li&gt;
+&lt;li&gt;背包界面打开/关闭&lt;/li&gt;
+&lt;li&gt;暂停菜单显示/隐藏&lt;/li&gt;
+&lt;li&gt;教程提示弹出/消失&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="5-输入校验stringisnullorempty"&gt;5. 输入校验（string.IsNullOrEmpty）
+&lt;/h2&gt;&lt;h3 id="是什么-4"&gt;是什么
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;string.IsNullOrEmpty(str)&lt;/code&gt; 返回 &lt;code&gt;true&lt;/code&gt; 当字符串是 &lt;code&gt;null&lt;/code&gt; 或 &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;（空串）。在用户输入场景下，&lt;strong&gt;必须在发送请求前校验&lt;/strong&gt;，避免发送无意义的空数据。&lt;/p&gt;
+&lt;h3 id="最简代码示例-3"&gt;最简代码示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; OnClickLogin()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;.IsNullOrEmpty(username.text))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; MessageBox.Show(&lt;span style="color:#e6db74"&gt;&amp;#34;请输入账号&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;.IsNullOrEmpty(password.text))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; MessageBox.Show(&lt;span style="color:#e6db74"&gt;&amp;#34;请输入密码&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 校验通过，发送请求&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; UserService.Instance.SendLogin(username.text, password.text);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="相关-api-对比"&gt;相关 API 对比
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;.IsNullOrEmpty(s) &lt;span style="color:#75715e"&gt;// null 或 &amp;#34;&amp;#34; → true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;.IsNullOrWhiteSpace(s) &lt;span style="color:#75715e"&gt;// null 或 &amp;#34;&amp;#34; 或 &amp;#34; &amp;#34; → true（推荐）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s?.Trim().Length == &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#75715e"&gt;// 手动写法&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="常见使用场景-4"&gt;常见使用场景
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;登录/注册表单校验&lt;/li&gt;
+&lt;li&gt;聊天消息发送前检查&lt;/li&gt;
+&lt;li&gt;搜索框输入校验&lt;/li&gt;
+&lt;li&gt;配置文件字段读取后判空&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="6-消息弹窗messagebox"&gt;6. 消息弹窗（MessageBox）
+&lt;/h2&gt;&lt;h3 id="是什么-5"&gt;是什么
+&lt;/h3&gt;&lt;p&gt;一个通用弹窗工具类，用于向玩家展示提示信息。支持&lt;strong&gt;纯提示&lt;/strong&gt;和&lt;strong&gt;带回调按钮&lt;/strong&gt;（点击&amp;quot;确定&amp;quot;后执行某个函数）。&lt;/p&gt;
+&lt;h3 id="最简代码示例-4"&gt;最简代码示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 简单提示&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;MessageBox.Show(&lt;span style="color:#e6db74"&gt;&amp;#34;密码不能为空&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 带确定按钮回调（注册成功后关闭注册界面）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;MessageBox.Show(&lt;span style="color:#e6db74"&gt;&amp;#34;注册成功，请登录&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;提示&amp;#34;&lt;/span&gt;, MessageBoxType.Information,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;确定&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;取消&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; () =&amp;gt; { CloseRegister(); } &lt;span style="color:#75715e"&gt;// 点确定时执行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="常见使用场景-5"&gt;常见使用场景
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;错误提示（&amp;ldquo;网络连接失败&amp;rdquo;）&lt;/li&gt;
+&lt;li&gt;操作确认（&amp;ldquo;确定要删除角色吗？&amp;quot;）&lt;/li&gt;
+&lt;li&gt;成功反馈（&amp;ldquo;注册成功，请登录&amp;rdquo;）&lt;/li&gt;
+&lt;li&gt;系统公告弹窗&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="7-待发消息队列pendingmessage-模式"&gt;7. 待发消息队列（pendingMessage 模式）
+&lt;/h2&gt;&lt;h3 id="是什么-6"&gt;是什么
+&lt;/h3&gt;&lt;p&gt;当用户点击登录/注册时，TCP 连接&lt;strong&gt;可能还没建立&lt;/strong&gt;。此时不能直接发包，而是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;把要发的消息存到 &lt;code&gt;pendingMessage&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;发起连接 &lt;code&gt;ConnectToServer()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;连接成功后（&lt;code&gt;OnGameServerConnect&lt;/code&gt;），检查 &lt;code&gt;pendingMessage&lt;/code&gt;，有就发出去并清空&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这是一种**&amp;ldquo;先存后发&amp;rdquo;**的异步处理模式。&lt;/p&gt;
+&lt;h3 id="最简代码示例-5"&gt;最简代码示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;UserService&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; NetMessage pendingMessage; &lt;span style="color:#75715e"&gt;// 待发消息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;bool&lt;/span&gt; connected = &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; SendLogin(&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt; user, &lt;span style="color:#66d9ef"&gt;string&lt;/span&gt; pass)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; NetMessage msg = &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; NetMessage();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; msg.Request = &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; UserLoginRequest { Username = user, Password = pass };
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (connected)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 已连接，直接发&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; NetClient.Instance.SendMessage(msg);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 未连接，先存起来，再去连&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; pendingMessage = msg;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ConnectToServer();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; OnGameServerConnect(&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; result)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (result == &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;) &lt;span style="color:#75715e"&gt;// 连接成功&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; connected = &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (pendingMessage != &lt;span style="color:#66d9ef"&gt;null&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; NetClient.Instance.SendMessage(pendingMessage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; pendingMessage = &lt;span style="color:#66d9ef"&gt;null&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// 发完清空&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 连接失败，通知 UI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; DisconnectNotify();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="为什么不先连接再让用户操作"&gt;为什么不先连接再让用户操作
+&lt;/h3&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;如果一进游戏就连接，玩家可能停留在登录界面很久，白白占用服务器连接。&lt;strong&gt;用户点击时再连&lt;/strong&gt;更节省资源。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h3 id="常见使用场景-6"&gt;常见使用场景
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;游戏登录（点击时才建立 TCP）&lt;/li&gt;
+&lt;li&gt;聊天系统（发消息时检查 WebSocket 是否连通）&lt;/li&gt;
+&lt;li&gt;断线重连后补发上次未发出的请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="8-消息订阅与分发messagedistributer"&gt;8. 消息订阅与分发（MessageDistributer）
+&lt;/h2&gt;&lt;h3 id="是什么-7"&gt;是什么
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;MessageDistributer&lt;/code&gt; 是一个&lt;strong&gt;消息路由器&lt;/strong&gt;。网络层收到服务器的数据包后，根据包类型自动分发到对应的处理函数。&lt;/p&gt;
+&lt;p&gt;工作流程：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;服务器发来 UserLoginResponse 
+ → NetClient 收到原始字节 
+ → 反序列化成对象 
+ → MessageDistributer 根据类型查表 
+ → 调用 UserService.OnUserLogin(response)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="最简代码示例-6"&gt;最简代码示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 订阅：告诉分发器，收到 UserLoginResponse 类型时调用 OnUserLogin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;MessageDistributer.Instance.Subscribe&amp;lt;UserLoginResponse&amp;gt;(OnUserLogin);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 处理函数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; OnUserLogin(&lt;span style="color:#66d9ef"&gt;object&lt;/span&gt; sender, UserLoginResponse response)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (response.Result == Result.Success)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Debug.Log(&lt;span style="color:#e6db74"&gt;&amp;#34;登录成功，用户：&amp;#34;&lt;/span&gt; + response.Username);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Debug.Log(&lt;span style="color:#e6db74"&gt;&amp;#34;登录失败：&amp;#34;&lt;/span&gt; + response.Errormsg);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 取消订阅（在 Dispose 中）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;MessageDistributer.Instance.Unsubscribe&amp;lt;UserLoginResponse&amp;gt;(OnUserLogin);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="常见使用场景-7"&gt;常见使用场景
+&lt;/h3&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;场景&lt;/th&gt;
+ &lt;th&gt;订阅消息类型&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;登录&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;UserLoginResponse&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;注册&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;UserRegisterResponse&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;聊天&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;ChatMessageResponse&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;战斗&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;BattleResultResponse&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;背包&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;InventoryUpdateNotify&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="设计优势"&gt;设计优势
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;解耦&lt;/strong&gt;：网络层不需要知道 UI 怎么处理&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;扩展&lt;/strong&gt;：新增消息类型只需 &lt;code&gt;Subscribe&lt;/code&gt; 一行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;集中管理&lt;/strong&gt;：所有消息路由一目了然&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="9-网络连接与断开处理"&gt;9. 网络连接与断开处理
+&lt;/h2&gt;&lt;h3 id="是什么-8"&gt;是什么
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;UserService&lt;/code&gt; 监听网络连接和断开事件，在不同状态下做不同处理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;连接成功&lt;/strong&gt;：发送排队中的消息&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;连接失败&lt;/strong&gt;：通知 UI 显示错误&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;断开连接&lt;/strong&gt;：检查是否有未完成的请求，通知 UI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="最简代码示例-7"&gt;最简代码示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;UserService&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; UserService()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 订阅网络事件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; NetClient.Instance.OnConnect += OnGameServerConnect;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; NetClient.Instance.OnDisconnect += OnGameServerDisconnect;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; OnGameServerConnect(&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; result)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (result == &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; connected = &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 发送排队消息...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; DisconnectNotify(); &lt;span style="color:#75715e"&gt;// 连接失败&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; OnGameServerDisconnect(&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; result)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; DisconnectNotify();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; DisconnectNotify()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; connected = &lt;span style="color:#66d9ef"&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (pendingMessage != &lt;span style="color:#66d9ef"&gt;null&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// 有挂起的登录请求 → 通知 UI &amp;#34;网络错误&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (pendingMessage.Request &lt;span style="color:#66d9ef"&gt;is&lt;/span&gt; UserLoginRequest)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; OnLogin?.Invoke(Result.Failed, &lt;span style="color:#e6db74"&gt;&amp;#34;服务器连接失败&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (pendingMessage.Request &lt;span style="color:#66d9ef"&gt;is&lt;/span&gt; UserRegisterRequest)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; OnRegister?.Invoke(Result.Failed, &lt;span style="color:#e6db74"&gt;&amp;#34;服务器连接失败&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; pendingMessage = &lt;span style="color:#66d9ef"&gt;null&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="常见使用场景-8"&gt;常见使用场景
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;登录/注册的网络错误提示&lt;/li&gt;
+&lt;li&gt;游戏中断线重连机制&lt;/li&gt;
+&lt;li&gt;心跳超时检测&lt;/li&gt;
+&lt;li&gt;服务器维护踢人处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="10-场景切换scenemanager"&gt;10. 场景切换（SceneManager）
+&lt;/h2&gt;&lt;h3 id="是什么-9"&gt;是什么
+&lt;/h3&gt;&lt;p&gt;登录成功后，需要从登录场景跳转到角色选择场景。项目使用了自定义的 &lt;code&gt;SceneManager&lt;/code&gt;（非 Unity 自带的 &lt;code&gt;UnityEngine.SceneManagement.SceneManager&lt;/code&gt;），封装了加载逻辑。&lt;/p&gt;
+&lt;h3 id="最简代码示例-8"&gt;最简代码示例
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 项目中的写法（自定义 SceneManager 单例）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SceneManager.Instance.LoadScene(&lt;span style="color:#e6db74"&gt;&amp;#34;CharSelect&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 如果用 Unity 原生 API：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;using&lt;/span&gt; UnityEngine.SceneManagement;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 同步加载（会卡住）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SceneManager.LoadScene(&lt;span style="color:#e6db74"&gt;&amp;#34;CharSelect&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 异步加载（推荐，可以做加载进度条）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;StartCoroutine(LoadSceneAsync(&lt;span style="color:#e6db74"&gt;&amp;#34;CharSelect&amp;#34;&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;IEnumerator LoadSceneAsync(&lt;span style="color:#66d9ef"&gt;string&lt;/span&gt; sceneName)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;while&lt;/span&gt; (!op.isDone)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;float&lt;/span&gt; progress = op.progress; &lt;span style="color:#75715e"&gt;// 0~1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Debug.Log(&lt;span style="color:#e6db74"&gt;&amp;#34;加载进度：&amp;#34;&lt;/span&gt; + (progress * &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;) + &lt;span style="color:#e6db74"&gt;&amp;#34;%&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;yield&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;null&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="常见使用场景-9"&gt;常见使用场景
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;登录成功 → 角色选择场景&lt;/li&gt;
+&lt;li&gt;选择角色 → 进入主城场景&lt;/li&gt;
+&lt;li&gt;主城 → 副本/战斗场景&lt;/li&gt;
+&lt;li&gt;战斗结束 → 结算/主城场景&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="11-整体调用流程图"&gt;11. 整体调用流程图
+&lt;/h2&gt;&lt;h3 id="登录流程"&gt;登录流程
+&lt;/h3&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;┌──────────────────────────────────────────────────────────────────┐
+│ 登录流程 │
+├──────────────────────────────────────────────────────────────────┤
+│ │
+│ ① UILogin.Start() │
+│ └─→ UserService.Instance.OnLogin = OnLogin (注册回调) │
+│ │
+│ ② 用户输入账号密码，点击登录按钮 │
+│ └─→ UILogin.OnClickLogin() │
+│ ├─ 校验：账号为空？密码为空？ → 弹窗提示 │
+│ └─ 通过 → UserService.Instance.SendLogin(user, pass) │
+│ │
+│ ③ UserService.SendLogin() │
+│ ├─ 已连接 → 直接发送 NetMessage │
+│ └─ 未连接 → pendingMessage = msg │
+│ ConnectToServer() → 127.0.0.1:8000 │
+│ │
+│ ④ 连接成功 → OnGameServerConnect() │
+│ └─→ 发送 pendingMessage → 清空 │
+│ │
+│ ⑤ 服务器返回 UserLoginResponse │
+│ └─→ MessageDistributer 分发 │
+│ └─→ UserService.OnUserLogin() │
+│ ├─ 成功：保存用户信息 SetupUserInfo() │
+│ └─→ OnLogin?.Invoke(result, errmsg) │
+│ │
+│ ⑥ UILogin.OnLogin() 被调用 │
+│ ├─ 成功 → SceneManager.Instance.LoadScene(&amp;#34;CharSelect&amp;#34;) │
+│ └─ 失败 → MessageBox.Show(错误信息) │
+│ │
+└──────────────────────────────────────────────────────────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="注册流程"&gt;注册流程
+&lt;/h3&gt;&lt;pre tabindex="0"&gt;&lt;code&gt;┌──────────────────────────────────────────────────────────────────┐
+│ 注册流程 │
+├──────────────────────────────────────────────────────────────────┤
+│ │
+│ ① UIRegister.Start() │
+│ └─→ UserService.Instance.OnRegister = OnRegister (注册回调) │
+│ │
+│ ② 用户输入账号、密码、确认密码，点击注册按钮 │
+│ └─→ UIRegister.OnClickRegister() │
+│ ├─ 校验：任一为空？两次密码不一致？ → 弹窗提示 │
+│ └─ 通过 → UserService.Instance.SendRegister(user, pass) │
+│ │
+│ ③ UserService.SendRegister() │
+│ ├─ 已连接 → 直接发送 │
+│ └─ 未连接 → pendingMessage + ConnectToServer() │
+│ │
+│ ④ 服务器返回 UserRegisterResponse │
+│ └─→ UserService.OnUserRegister() │
+│ └─→ OnRegister?.Invoke(result, errmsg) │
+│ │
+│ ⑤ UIRegister.OnRegister() 被调用 │
+│ ├─ 成功 → MessageBox.Show(&amp;#34;注册成功，请登录&amp;#34;) │
+│ │ 点确定 → CloseRegister() │
+│ │ ├─ 隐藏注册面板 │
+│ │ └─ 显示登录面板 │
+│ └─ 失败 → MessageBox.Show(错误信息) │
+│ │
+└──────────────────────────────────────────────────────────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id="易错点总结"&gt;易错点总结
+&lt;/h2&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th style="text-align: center"&gt;序号&lt;/th&gt;
+ &lt;th&gt;问题&lt;/th&gt;
+ &lt;th&gt;原因&lt;/th&gt;
+ &lt;th&gt;解决方案&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;1&lt;/td&gt;
+ &lt;td&gt;回调被覆盖，点登录没反应&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;OnLogin = xxx&lt;/code&gt; 用了赋值而非 &lt;code&gt;+=&lt;/code&gt;，另一个面板把它覆盖了&lt;/td&gt;
+ &lt;td&gt;保证同一时刻只有一个面板激活，或改用 &lt;code&gt;+=&lt;/code&gt; / &lt;code&gt;event&lt;/code&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;2&lt;/td&gt;
+ &lt;td&gt;点登录后无响应也无报错&lt;/td&gt;
+ &lt;td&gt;TCP 连接失败但 &lt;code&gt;DisconnectNotify&lt;/code&gt; 没正确调回调&lt;/td&gt;
+ &lt;td&gt;检查 &lt;code&gt;pendingMessage&lt;/code&gt; 是否被正确设置&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;3&lt;/td&gt;
+ &lt;td&gt;注册成功后直接调用登录界面的方法报空&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;uiLogin&lt;/code&gt; 在 Inspector 中未赋值&lt;/td&gt;
+ &lt;td&gt;检查 Inspector 中拖拽引用是否完整&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;4&lt;/td&gt;
+ &lt;td&gt;&lt;code&gt;Passward&lt;/code&gt; 拼写错误&lt;/td&gt;
+ &lt;td&gt;历史命名问题（协议生成）&lt;/td&gt;
+ &lt;td&gt;只要客户端和服务端/协议字段名&lt;strong&gt;一致&lt;/strong&gt;即可，不影响功能&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;5&lt;/td&gt;
+ &lt;td&gt;注释写&amp;quot;登录成功&amp;quot;实际是注册成功&lt;/td&gt;
+ &lt;td&gt;复制代码后忘改注释&lt;/td&gt;
+ &lt;td&gt;养成写完逻辑就校对注释的习惯&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="设计模式速查"&gt;设计模式速查
+&lt;/h2&gt;&lt;p&gt;本项目用到的设计模式：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;单例模式 (Singleton)
+├── UserService.Instance
+├── NetClient.Instance
+├── SceneManager.Instance
+└── MessageDistributer.Instance
+
+观察者模式 (Observer)
+├── UnityAction&amp;lt;Result, string&amp;gt; OnLogin / OnRegister
+└── MessageDistributer 的 Subscribe / Unsubscribe
+
+延迟发送模式 (Pending Queue)
+└── pendingMessage：未连接时暂存，连通后补发
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;&lt;strong&gt;一句话总结&lt;/strong&gt;：UI 层只管&amp;quot;校验输入 + 显示结果&amp;rdquo;，网络层只管&amp;quot;连接 + 收发 + 分发&amp;quot;，两者通过&lt;strong&gt;回调委托&lt;/strong&gt;桥接，职责清晰，互不侵入。&lt;/p&gt;
+
+ &lt;/blockquote&gt;</description></item><item><title>03MMORPG项目-C#复习手册</title><link>https://muwustudio.github.io/posts/03%E5%A4%8D%E4%B9%A0/</link><pubDate>Thu, 02 Apr 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/03%E5%A4%8D%E4%B9%A0/</guid><description>&lt;h1 id="-mmorpg项目--c-复习手册"&gt;🎮 MMORPG项目 · C# 复习手册
 &lt;/h1&gt;
  &lt;blockquote&gt;
  &lt;p&gt;适用项目：Unity MMORPG客户端开发
@@ -1757,27 +2625,9 @@ git push
 &lt;hr&gt;
 
  &lt;blockquote&gt;
- &lt;p&gt;&lt;em&gt;本文是「牧屋技术笔记」系列的第一篇。牧屋（MUWU）是我的独立游戏工作室，我会在这里持续记录游戏开发和技术学习的过程。如果你对独立游戏开发感兴趣，欢迎关注这个博客。&lt;/em&gt;&lt;/p&gt;
+ &lt;p&gt;&lt;em&gt;牧屋（MUWU）是我的独立游戏工作室，我会在这里持续记录游戏开发和技术学习的过程。如果你对独立游戏开发感兴趣，欢迎关注这个博客。&lt;/em&gt;&lt;/p&gt;
 
- &lt;/blockquote&gt;</description></item><item><title>MMORPG开发日志01：背包系统的设计与实现</title><link>https://muwustudio.github.io/posts/mmorpg-devlog-01/</link><pubDate>Tue, 24 Mar 2026 14:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/mmorpg-devlog-01/</guid><description>&lt;img src="https://muwustudio.github.io/" alt="Featured image of post MMORPG开发日志01：背包系统的设计与实现" /&gt;&lt;h2 id="今天做了什么"&gt;今天做了什么？
-&lt;/h2&gt;&lt;p&gt;完成了MMORPG项目的背包系统，支持物品添加、删除、堆叠和排序。&lt;/p&gt;
-&lt;h2 id="技术设计"&gt;技术设计
-&lt;/h2&gt;&lt;p&gt;使用List存储物品列表，ScriptableObject定义物品模板。&lt;/p&gt;
-&lt;h2 id="遇到的问题"&gt;遇到的问题
-&lt;/h2&gt;&lt;h3 id="问题1物品堆叠溢出"&gt;问题1：物品堆叠溢出
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;现象：&lt;/strong&gt; 背包满时继续拾取可堆叠物品，数量会超过上限。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt; 在AddItem方法中添加堆叠上限检查。&lt;/p&gt;
-&lt;h3 id="问题2ui刷新不及时"&gt;问题2：UI刷新不及时
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;现象：&lt;/strong&gt; 拖拽物品后UI显示不同步。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt; 使用观察者模式，数据变更时触发UI刷新事件。&lt;/p&gt;
-&lt;h2 id="ai的帮助"&gt;AI的帮助
-&lt;/h2&gt;&lt;p&gt;用Cursor IDE加速了代码编写，用Ollama帮我Review了核心逻辑。&lt;/p&gt;
-&lt;h2 id="下一步计划"&gt;下一步计划
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;实现装备系统&lt;/li&gt;
-&lt;li&gt;添加物品排序功能&lt;/li&gt;
-&lt;li&gt;优化UI拖拽手感&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>01你好，牧屋！独立游戏开发之旅启航</title><link>https://muwustudio.github.io/posts/01%E7%89%A7%E5%B1%8B/</link><pubDate>Tue, 24 Mar 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/01%E7%89%A7%E5%B1%8B/</guid><description>&lt;img src="https://muwustudio.github.io/" alt="Featured image of post 01你好，牧屋！独立游戏开发之旅启航" /&gt;&lt;h2 id="-关于我"&gt;👋 关于我
+ &lt;/blockquote&gt;</description></item><item><title>01你好，牧屋！独立游戏开发之旅启航</title><link>https://muwustudio.github.io/posts/01%E7%89%A7%E5%B1%8B/</link><pubDate>Tue, 24 Mar 2026 10:00:00 +0800</pubDate><guid>https://muwustudio.github.io/posts/01%E7%89%A7%E5%B1%8B/</guid><description>&lt;img src="https://muwustudio.github.io/" alt="Featured image of post 01你好，牧屋！独立游戏开发之旅启航" /&gt;&lt;h2 id="-关于我"&gt;👋 关于我
 &lt;/h2&gt;&lt;p&gt;我是一名23岁的独立游戏开发者，正在学习Unity和C#。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;牧屋（MUWU）&lt;/strong&gt; 这个名字来源于&amp;quot;牧羊人的屋子&amp;quot;，代表着在广阔草原上自由创作的精神。&lt;/p&gt;
 &lt;h2 id="-为什么做游戏"&gt;🎯 为什么做游戏？
