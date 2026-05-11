@@ -2,7 +2,7 @@
 title: "01你好，牧屋！独立游戏开发之旅启航"
 description: "介绍牧屋工作室和我的游戏开发计划"
 date: 2026-03-24T10:00:00+08:00
-image: https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200
+image: cover.jpg
 tags:
   - 牧屋
   - 独立游戏
