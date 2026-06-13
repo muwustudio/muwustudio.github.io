@@ -545,31 +545,31 @@ IEnumerator LoadSceneAsync(string sceneName)
 │                         登录流程                                  │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  ① UILogin.Start()                                              │
-│     └─→ UserService.Instance.OnLogin = OnLogin  (注册回调)       │
+│  ① UILogin.Start()                                               │
+│     └─→ UserService.Instance.OnLogin = OnLogin  (注册回调)        │
 │                                                                  │
-│  ② 用户输入账号密码，点击登录按钮                                   │
+│  ② 用户输入账号密码，点击登录按钮                                     │
 │     └─→ UILogin.OnClickLogin()                                   │
-│         ├─ 校验：账号为空？密码为空？ → 弹窗提示                     │
+│         ├─ 校验：账号为空？密码为空？ → 弹窗提示                      │
 │         └─ 通过 → UserService.Instance.SendLogin(user, pass)     │
 │                                                                  │
-│  ③ UserService.SendLogin()                                      │
-│     ├─ 已连接 → 直接发送 NetMessage                               │
-│     └─ 未连接 → pendingMessage = msg                             │
+│  ③ UserService.SendLogin()                                       │
+│     ├─ 已连接 → 直接发送 NetMessage                                │
+│     └─ 未连接 → pendingMessage = msg                              │
 │                  ConnectToServer() → 127.0.0.1:8000              │
 │                                                                  │
-│  ④ 连接成功 → OnGameServerConnect()                              │
-│     └─→ 发送 pendingMessage → 清空                               │
+│  ④ 连接成功 → OnGameServerConnect()                               │
+│     └─→ 发送 pendingMessage → 清空                                │
 │                                                                  │
-│  ⑤ 服务器返回 UserLoginResponse                                  │
+│  ⑤ 服务器返回 UserLoginResponse                                   │
 │     └─→ MessageDistributer 分发                                  │
 │         └─→ UserService.OnUserLogin()                            │
 │             ├─ 成功：保存用户信息 SetupUserInfo()                   │
 │             └─→ OnLogin?.Invoke(result, errmsg)                  │
 │                                                                  │
-│  ⑥ UILogin.OnLogin() 被调用                                     │
-│     ├─ 成功 → SceneManager.Instance.LoadScene("CharSelect")     │
-│     └─ 失败 → MessageBox.Show(错误信息)                          │
+│  ⑥ UILogin.OnLogin() 被调用                                       │
+│     ├─ 成功 → SceneManager.Instance.LoadScene("CharSelect")      │
+│     └─ 失败 → MessageBox.Show(错误信息)                            │
 │                                                                  │
 └──────────────────────────────────────────────────────────────────┘
 ```
@@ -581,28 +581,28 @@ IEnumerator LoadSceneAsync(string sceneName)
 │                         注册流程                                  │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  ① UIRegister.Start()                                           │
-│     └─→ UserService.Instance.OnRegister = OnRegister (注册回调)  │
+│  ① UIRegister.Start()                                            │
+│     └─→ UserService.Instance.OnRegister = OnRegister (注册回调)   │
 │                                                                  │
-│  ② 用户输入账号、密码、确认密码，点击注册按钮                        │
+│  ② 用户输入账号、密码、确认密码，点击注册按钮                           │
 │     └─→ UIRegister.OnClickRegister()                             │
-│         ├─ 校验：任一为空？两次密码不一致？ → 弹窗提示               │
+│         ├─ 校验：任一为空？两次密码不一致？ → 弹窗提示                 │
 │         └─ 通过 → UserService.Instance.SendRegister(user, pass)  │
 │                                                                  │
-│  ③ UserService.SendRegister()                                   │
-│     ├─ 已连接 → 直接发送                                         │
-│     └─ 未连接 → pendingMessage + ConnectToServer()               │
+│  ③ UserService.SendRegister()                                    │
+│     ├─ 已连接 → 直接发送                                           │
+│     └─ 未连接 → pendingMessage + ConnectToServer()                │
 │                                                                  │
-│  ④ 服务器返回 UserRegisterResponse                               │
+│  ④ 服务器返回 UserRegisterResponse                                │
 │     └─→ UserService.OnUserRegister()                             │
 │         └─→ OnRegister?.Invoke(result, errmsg)                   │
 │                                                                  │
-│  ⑤ UIRegister.OnRegister() 被调用                                │
-│     ├─ 成功 → MessageBox.Show("注册成功，请登录")                  │
+│  ⑤ UIRegister.OnRegister() 被调用                                 │
+│     ├─ 成功 → MessageBox.Show("注册成功，请登录")                   │
 │     │         点确定 → CloseRegister()                            │
 │     │                  ├─ 隐藏注册面板                             │
 │     │                  └─ 显示登录面板                             │
-│     └─ 失败 → MessageBox.Show(错误信息)                          │
+│     └─ 失败 → MessageBox.Show(错误信息)                            │
 │                                                                  │
 └──────────────────────────────────────────────────────────────────┘
 ```
